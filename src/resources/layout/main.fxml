@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <VBox prefWidth="200.0" />
+    <VBox>
+        <StackPane>
+            <ImageView fitHeight="480.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                <Image url="@../image/map.jpg" />
+            </ImageView>
+            <Pane fx:id="map" prefHeight="200.0" prefWidth="200.0">
+
+            </Pane>
+        </StackPane>
+        <ListView prefHeight="200.0" prefWidth="200.0" />
+    </VBox>
+    <VBox prefWidth="200.0" />
+</HBox>
