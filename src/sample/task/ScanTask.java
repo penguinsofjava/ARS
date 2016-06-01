@@ -1,4 +1,4 @@
-package sample.scan;
+package sample.task;
 
 import sample.model.Radar;
 
