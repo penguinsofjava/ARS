@@ -3,13 +3,12 @@ package sample.model;
 import java.util.Arrays;
 
 public class Plane {
-    //Instance variables
     private String name;
     private int speed;
+    private Type type;
     private Position[] path;
     private Position position;
 
-    //CONSTRUCTOR
     public Plane(String name, int speed, Position[] path, Position position) {
         this.name = name;
         this.speed = speed;
@@ -17,7 +16,6 @@ public class Plane {
         this.position = position;
     }
 
-    //SETTERS AND GETTERS
     public String getName() {
         return name;
     }
@@ -50,7 +48,6 @@ public class Plane {
         this.position = position;
     }
 
-        //toString
     @Override
     public String toString() {
         return "Plane{" +
@@ -59,5 +56,31 @@ public class Plane {
                 ", path=" + Arrays.toString(path) +
                 ", position=" + position +
                 '}';
+    }
+
+    public enum Type {
+        FRIENDLY("friendly"), HOSTILE("hostile"), UNKNOWN("unknown");
+
+        private String value;
+
+        Type(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public Type fromString(String type) {
+            switch (type) {
+                case "friendly":
+                    return FRIENDLY;
+                case "hostile":
+                    return HOSTILE;
+                default:
+                    return UNKNOWN;
+            }
+        }
     }
 }
