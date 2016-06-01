@@ -1,17 +1,21 @@
 package sample.model;
 
 public class Radar {
+    private int id;
     private int scanAngle = 20; // default (degrees)
     private int radius = 50; // default (pixels)
     private int scanInterval = 1000; // default (milliseconds)
     private int[] position;
+
     private ChangeListener listener;
+    private Color color = Color.ACTIVE;
 
     public Radar() {
         /* Empty - Not sure if we'll ever need this... Keeping it for now... */
     }
 
-    public Radar(Integer scanAngle, Integer radius, Integer scanInterval, int[] position) {
+    public Radar(int id, Integer scanAngle, Integer radius, Integer scanInterval, int[] position) {
+        this.id = id;
         if (scanAngle != null) this.scanAngle = scanAngle;
         if (radius != null) this.radius = radius;
         if (scanInterval != null) this.scanInterval = scanInterval;
@@ -59,6 +63,14 @@ public class Radar {
 
     public void setPosition(int x, int y) {
         this.position = new int[]{x, y};
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public void setListener(ChangeListener listener) {

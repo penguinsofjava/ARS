@@ -107,12 +107,12 @@ public class RadarView extends Pane implements Position {
     private void draw() {
         Canvas canvas = new Canvas(radar.getWidth() + 2, radar.getHeight() + 2); // +2 to avoid stroke cutoff
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        graphicsContext.setFill(Radar.Color.ACTIVE.getFill());
-        graphicsContext.setStroke(Radar.Color.ACTIVE.getStroke());
+        graphicsContext.setFill(radar.getColor().getFill());
+        graphicsContext.setStroke(radar.getColor().getStroke());
         graphicsContext.setLineWidth(1);
         graphicsContext.fillOval(1, 1, radar.getWidth(), radar.getHeight()); // Draw at (1, 1) to avoid stroke cutoff
         graphicsContext.strokeOval(1, 1, radar.getWidth(), radar.getHeight());
-        graphicsContext.strokeArc(1, 1, radar.getWidth(), radar.getHeight(), radar.getRadius(), 360 - radar.getRadius(), ArcType.ROUND);
+        graphicsContext.strokeArc(1, 1, radar.getWidth(), radar.getHeight(), radar.getScanAngle(), 360 - radar.getRadius(), ArcType.ROUND);
         getChildren().clear();
         getChildren().add(canvas);
     }
