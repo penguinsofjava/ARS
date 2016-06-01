@@ -8,12 +8,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.ArcType;
 import javafx.util.Duration;
 import sample.model.Position;
+import sample.model.Positionable;
 import sample.model.Radar;
 import sample.scan.ScanTask;
 
 import java.util.Timer;
 
-public class RadarView extends Pane implements Position {
+public class RadarView extends Pane implements Positionable {
     private Radar radar;
     private Timer scannerTimer;
     private RotateTransition transition;
@@ -45,14 +46,19 @@ public class RadarView extends Pane implements Position {
         return radar;
     }
 
-    public void setPosition(int x, int y) {
+    private void setPosition(int x, int y) {
         setLayoutX(x);
         setLayoutY(y);
     }
 
     @Override
-    public int[] getPosition() {
-        return new int[]{(int) getLayoutX(), (int) getLayoutY()};
+    public void setPosition(Position position) {
+        setPosition(position.getX(), position.getY());
+    }
+
+    @Override
+    public Position getPosition() {
+        return new Position((int) getLayoutX(), (int) getLayoutY());
     }
 
     @Override
@@ -63,16 +69,6 @@ public class RadarView extends Pane implements Position {
     @Override
     public void moveInY(int by) {
         setLayoutY(getLayoutY() + by);
-    }
-
-    @Override
-    public int getPositionX() {
-        return (int) getLayoutX();
-    }
-
-    @Override
-    public int getPositionY() {
-        return (int) getLayoutY();
     }
 
     public void startScanning() {
