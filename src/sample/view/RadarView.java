@@ -10,7 +10,7 @@ import javafx.util.Duration;
 import sample.model.Position;
 import sample.model.Positionable;
 import sample.model.Radar;
-import sample.scan.ScanTask;
+import sample.task.ScanTask;
 
 import java.util.Timer;
 
