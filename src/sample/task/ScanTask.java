@@ -1,4 +1,4 @@
-package sample.scan;
+package sample.task;
 
 import sample.model.Radar;
 
@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * A {@link TimerTask} that performs a scan for {@link Plane}s on the "map" to see whether they are friendly or hostile
+ * A {@link TimerTask} that performs a task for {@link Plane}s on the "map" to see whether they are friendly or hostile
  * and kicks off some notifications and stuff...
  *
  * Make sure to cancel the parent {@link Timer} once you are done with it!
