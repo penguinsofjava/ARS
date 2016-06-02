@@ -26,7 +26,7 @@ public class PlaneView extends Pane implements Positionable {
     public void setPlane(Plane plane) {
         this.plane = plane;
 
-        setWidth(WIDTH); // +2 to avoid stroke cutoff
+        setWidth(WIDTH);
         setHeight(HEIGHT);
 
         setPosition(plane.getPath() != null ? plane.getPath()[0] : new Position(0, 0)); // set position to the first coordinate in the path
