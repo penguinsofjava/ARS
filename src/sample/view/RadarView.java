@@ -91,7 +91,13 @@ public class RadarView extends Pane implements Positionable {
             transition = new RotateTransition(Duration.millis(radar.getScanInterval()), this);
             transition.setCycleCount(-1);
             transition.setByAngle(360);
-            transition.setInterpolator(Interpolator.LINEAR);
+            transition.setInterpolator(new Interpolator() {
+                @Override
+                protected double curve(double v) {
+                    radar.setScanAngleAlpha((int) (360 * v));
+                    return v; // Linear interpolation
+                }
+            });
         }
         if (animate) {
             transition.play();

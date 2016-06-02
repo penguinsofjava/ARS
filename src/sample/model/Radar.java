@@ -5,6 +5,7 @@ public class Radar {
     private int scanAngle = 20; // default (degrees)
     private int radius = 50; // default (pixels)
     private int scanInterval = 1000; // default (milliseconds)
+    private int scanAngleAlpha;
     private Position position;
 
     private ChangeListener listener;
@@ -55,6 +56,14 @@ public class Radar {
     public void setScanInterval(int scanInterval) {
         this.scanInterval = scanInterval;
         notifyChange();
+    }
+
+    public int getScanAngleAlpha() {
+        return scanAngleAlpha;
+    }
+
+    public void setScanAngleAlpha(int scanAngleAlpha) {
+        this.scanAngleAlpha = scanAngleAlpha;
     }
 
     public Position getPosition() {
