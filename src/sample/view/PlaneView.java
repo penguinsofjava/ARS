@@ -49,8 +49,8 @@ public class PlaneView extends Pane implements Positionable {
 
     @Override
     public void setPosition(Position position) {
-        setLayoutX(position.getX());
-        setLayoutY(position.getY());
+    	setX(position.getX());
+    	setY(position.getY());
     }
 
     @Override
@@ -60,13 +60,24 @@ public class PlaneView extends Pane implements Positionable {
 
     @Override
     public void moveInX(int by) {
-        setLayoutY(getLayoutX() + by);
+    	setX((int) getLayoutX() + by);
     }
 
     @Override
     public void moveInY(int by) {
-        setLayoutY(getLayoutY() + by);
+    	setY((int) getLayoutY() + by);
     }
+    
+    private void setX(int x) {
+    	setLayoutX(x);
+    	plane.getPosition().setX(x);
+    }
+    
+    private void setY(int y) {
+    	setLayoutY(y);
+    	plane.getPosition().setY(y);
+    }
+    
 
     private void draw() {
         Canvas canvas = new Canvas(PlaneView.WIDTH, PlaneView.HEIGHT);
