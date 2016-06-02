@@ -2,7 +2,9 @@ package sample;
 
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+import sample.model.Plane;
 import sample.model.Radar;
+import sample.view.PlaneView;
 import sample.view.RadarView;
 
 import java.net.URL;
@@ -23,5 +25,11 @@ public class Controller implements Initializable {
             map.getChildren().add(radarView);
             radarView.startScanning();
         }
+    }
+
+    public void addPlane(Plane plane) {
+        PlaneView planeView = new PlaneView(plane);
+        map.getChildren().add(planeView);
+        planeView.startFlying();
     }
 }

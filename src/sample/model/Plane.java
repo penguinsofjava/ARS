@@ -8,13 +8,11 @@ public class Plane {
     private int speed;
     private Type type;
     private Position[] path;
-    private Position position;
 
-    public Plane(String name, int speed, Position[] path, Position position) {
+    public Plane(String name, int speed, Position[] path) {
         this.name = name;
         this.speed = speed;
         this.path = path;
-        this.position = position;
     }
 
     public String getName() {
@@ -42,19 +40,11 @@ public class Plane {
     }
 
     public Position[] getPath() {
-        return path;
+        return path.length != 0 ? path : null;
     }
 
     public void setPath(Position[] path) {
         this.path = path;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     @Override
@@ -63,7 +53,6 @@ public class Plane {
                 "name='" + name + '\'' +
                 ", speed=" + speed +
                 ", path=" + Arrays.toString(path) +
-                ", position=" + position +
                 '}';
     }
 
