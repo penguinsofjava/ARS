@@ -40,11 +40,13 @@ public class RadarMath {
 		double planeX = plane.getPosition().getX();
 		double planeY = plane.getPosition().getY();
 		
-		double planeTheta = Math.atan(Math.toRadians(planeX / planeY));
+		double planeTheta = planeY <= 0
+				? Math.atan(Math.toRadians(planeY / planeX))
+				: Math.toRadians(180) + Math.atan(Math.toRadians(planeY / planeX));
 
 		double radarAlpha = radar.getScanAngleAlpha();
 		double radarBeta = radar.getScanAngle();
-		
+
 		return planeTheta <= (radarAlpha + radarBeta) && planeTheta >= radarAlpha;
 	}
 	
