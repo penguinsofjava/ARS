@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.model.Position;
 import sample.model.Radar;
 
 import java.util.ArrayList;
@@ -26,9 +27,9 @@ public class Main extends Application {
 
     private void loadRadars() {
         ArrayList<Radar> dummyRadars = new ArrayList<Radar>() {{
-            add(new Radar(0, 20, 40, 500, new int[]{300, 100}));
-            add(new Radar(1, 10, 100, 1000, new int[]{400, 200}));
-            add(new Radar(2, null, null, 700, new int[]{800, 70}));
+            add(new Radar(0, 20, 40, 500, new Position(300, 100)));
+            add(new Radar(1, 10, 100, 1000, new Position(400, 200)));
+            add(new Radar(2, null, null, 700, new Position(800, 70)));
         }};
 
         controller.drawRadars(dummyRadars);

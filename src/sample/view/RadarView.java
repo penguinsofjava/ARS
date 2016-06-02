@@ -29,7 +29,7 @@ public class RadarView extends Pane implements Positionable {
         setWidth(radar.getWidth() + 2); // +2 to avoid stroke cutoff
         setHeight(radar.getHeight() + 2);
 
-        setPosition(radar.getPosition()[0], radar.getPosition()[1]);
+        setPosition(radar.getPosition());
 
         draw();
 
@@ -46,7 +46,7 @@ public class RadarView extends Pane implements Positionable {
         return radar;
     }
 
-    private void setPosition(int x, int y) {
+    public void setPosition(int x, int y) {
         setLayoutX(x);
         setLayoutY(y);
     }

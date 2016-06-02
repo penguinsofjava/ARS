@@ -24,7 +24,7 @@ public class ScanTask extends TimerTask {
 
     @Override
     public void run() {
-        System.out.println("Scan iteration at radar with position (" + radar.getPosition()[0] + ", " + radar.getPosition()[1] + ")");
+        System.out.println("Scan iteration at radar with position (" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ")");
 
         // TODO: Actual scanning - ENES GEL BURAYA!
     }

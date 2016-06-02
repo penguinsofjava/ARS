@@ -5,7 +5,7 @@ public class Radar {
     private int scanAngle = 20; // default (degrees)
     private int radius = 50; // default (pixels)
     private int scanInterval = 1000; // default (milliseconds)
-    private int[] position;
+    private Position position;
 
     private ChangeListener listener;
     private Color color = Color.ACTIVE;
@@ -14,7 +14,7 @@ public class Radar {
         /* Empty - Not sure if we'll ever need this... Keeping it for now... */
     }
 
-    public Radar(int id, Integer scanAngle, Integer radius, Integer scanInterval, int[] position) {
+    public Radar(int id, Integer scanAngle, Integer radius, Integer scanInterval, Position position) {
         this.id = id;
         if (scanAngle != null) this.scanAngle = scanAngle;
         if (radius != null) this.radius = radius;
@@ -57,12 +57,16 @@ public class Radar {
         notifyChange();
     }
 
-    public int[] getPosition() {
+    public Position getPosition() {
         return position;
     }
 
     public void setPosition(int x, int y) {
-        this.position = new int[]{x, y};
+        position = new Position(x, y);
+    }
+
+    public void setPosition(Position position) {
+        setPosition(position);
     }
 
     public Color getColor() {
