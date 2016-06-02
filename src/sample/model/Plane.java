@@ -8,6 +8,7 @@ public class Plane {
     private int speed;
     private Type type;
     private Position[] path;
+    private Position position;
 
     public Plane(String name, int speed, Position[] path) {
         this.name = name;
@@ -46,8 +47,16 @@ public class Plane {
     public void setPath(Position[] path) {
         this.path = path;
     }
+    
+    public Position getPosition() {
+		return position;
+	}
 
-    @Override
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	@Override
     public String toString() {
         return "Plane{" +
                 "name='" + name + '\'' +
