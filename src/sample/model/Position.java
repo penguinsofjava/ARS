@@ -4,6 +4,10 @@ public class Position {
     private int x;
     private int y;
 
+    public Position() {
+        /* empty */
+    }
+
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
