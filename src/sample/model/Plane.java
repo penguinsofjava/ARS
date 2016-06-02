@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Plane {
     private String name;
     private int speed;
-    private Type type;
+    private Type type = Type.HOSTILE;
     private Position[] path;
     private Position position = new Position();
 

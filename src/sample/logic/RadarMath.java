@@ -13,16 +13,9 @@ public class RadarMath {
 	 * 
 	 */
 	public static boolean isPlaneInTheRadar(Plane plane, Radar radar){
-		
-		if(isPlaneInTheCircle(plane, radar)  &&  isPlaneInTheAngle(plane, radar)){
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-		
+		return isPlaneInTheCircle(plane, radar)  &&  isPlaneInTheAngle(plane, radar);
 	}
+
 	/*
 	 * This function controls whether coordinates of plane satisfy the circle equation or not.
 	 * If they satisfy, the function returns TRUE, else FALSE.
@@ -34,7 +27,7 @@ public class RadarMath {
 		double ySideOFTheEquation = (plane.getPosition().getY() - radar.getPosition().getY())*(plane.getPosition().getY() - radar.getPosition().getY());
 		double radarRadius = radar.getRadius();
 		
-		return xSideOfTheEquation + ySideOFTheEquation <= radarRadius;
+		return xSideOfTheEquation + ySideOFTheEquation <= Math.pow(radarRadius, 2);
 	}
 	
 	
@@ -48,7 +41,7 @@ public class RadarMath {
 		double planeY = plane.getPosition().getY();
 		
 		double planeTheta = Math.atan(Math.toRadians(planeX / planeY));
-		
+
 		double radarAlpha = radar.getScanAngleAlpha();
 		double radarBeta = radar.getScanAngle();
 		

@@ -47,8 +47,8 @@ public class RadarView extends Pane implements Positionable {
     }
 
     public void setPosition(int x, int y) {
-        setLayoutX(x);
-        setLayoutY(y);
+        setLayoutX(x - getWidth() / 2);
+        setLayoutY(y - getHeight() / 2);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class RadarView extends Pane implements Positionable {
         if (transition == null) {
             transition = new RotateTransition(Duration.millis(radar.getScanInterval()), this);
             transition.setCycleCount(-1);
-            transition.setByAngle(360);
+            transition.setByAngle(-360);
             transition.setInterpolator(new Interpolator() {
                 @Override
                 protected double curve(double v) {
@@ -114,7 +114,7 @@ public class RadarView extends Pane implements Positionable {
         graphicsContext.setLineWidth(1);
         graphicsContext.fillOval(1, 1, radar.getWidth(), radar.getHeight()); // Draw at (1, 1) to avoid stroke cutoff
         graphicsContext.strokeOval(1, 1, radar.getWidth(), radar.getHeight());
-        graphicsContext.strokeArc(1, 1, radar.getWidth(), radar.getHeight(), radar.getScanAngle(), 360 - radar.getRadius(), ArcType.ROUND);
+        graphicsContext.strokeArc(1, 1, radar.getWidth(), radar.getHeight(), radar.getScanAngle(), 360 - radar.getScanAngle(), ArcType.ROUND);
         getChildren().clear();
         getChildren().add(canvas);
     }

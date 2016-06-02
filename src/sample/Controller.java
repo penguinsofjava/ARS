@@ -27,6 +27,12 @@ public class Controller implements Initializable {
         }
     }
 
+    public void drawPlanes(List<Plane> planes) {
+        for (Plane plane : planes) {
+            addPlane(plane);
+        }
+    }
+
     public void addPlane(Plane plane) {
         PlaneView planeView = new PlaneView(plane);
         map.getChildren().add(planeView);

@@ -12,8 +12,8 @@ import sample.task.FlyTask;
 import java.util.Timer;
 
 public class PlaneView extends Pane implements Positionable {
-    private static final int WIDTH = 5; // px
-    private static final int HEIGHT = 5; // px
+    private static final int WIDTH = 10; // px
+    private static final int HEIGHT = 10; // px
 
     private Plane plane;
 

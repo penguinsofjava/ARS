@@ -27,15 +27,14 @@ public class ScanTask extends TimerTask {
 
     @Override
     public void run() {
-        System.out.println("Scan iteration at radar with position (" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ")");
+//        System.out.println("Scan iteration at radar with position (" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ")");
 
-        for(Plane plane : PlaneCoordinator.getPlaness()){
+        for(Plane plane : PlaneCoordinator.getPlanes()){
         	if(RadarMath.isPlaneInTheRadar(plane, radar)){
         		if(plane.getType() == Plane.Type.HOSTILE){
-        			System.out.println("Yakaladým looo");
+        			System.out.println("Yakaladï¿½m looo");
         		}
         	}
-        	
         }
     }
 }
