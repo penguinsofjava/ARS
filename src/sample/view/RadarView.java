@@ -75,8 +75,8 @@ public class RadarView extends Pane implements Positionable {
         if (scannerTimer == null) {
             scannerTimer = new Timer();
         }
-        scannerTimer.schedule(ScanTask.with(radar), 0, radar.getScanInterval());
         toggleAnimation(true);
+        scannerTimer.schedule(ScanTask.with(radar), 0, radar.getScanInterval() / (360 / radar.getScanAngle()));
     }
 
     public void stopScanning() {
