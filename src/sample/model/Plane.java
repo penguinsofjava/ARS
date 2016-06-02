@@ -8,7 +8,7 @@ public class Plane {
     private int speed;
     private Type type;
     private Position[] path;
-    private Position position;
+    private Position position = new Position();
 
     public Plane(String name, int speed, Position[] path) {
         this.name = name;
