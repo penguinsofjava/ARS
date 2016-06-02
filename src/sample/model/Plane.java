@@ -33,6 +33,14 @@ public class Plane {
         this.speed = speed;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public Position[] getPath() {
         return path;
     }
