@@ -1,5 +1,8 @@
 package sample.task;
 
+import sample.coordinator.PlaneCoordinator;
+import sample.logic.RadarMath;
+import sample.model.Plane;
 import sample.model.Radar;
 
 import java.util.Timer;
@@ -24,8 +27,14 @@ public class ScanTask extends TimerTask {
 
     @Override
     public void run() {
-        System.out.println("Scan iteration at radar with position (" + radar.getPosition()[0] + ", " + radar.getPosition()[1] + ")");
+        System.out.println("Scan iteration at radar with position (" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ")");
 
-        // TODO: Actual scanning - ENES GEL BURAYA!
+        for(Plane plane : PlaneCoordinator.getPlanes()){
+        	if(RadarMath.isPlaneInTheRadar(plane, radar)){
+        		if(plane.getType() == Plane.Type.HOSTILE){
+        			System.out.println("Yakalad�m looo");
+        		}
+        	}
+        }
     }
 }

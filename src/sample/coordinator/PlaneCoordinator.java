@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class PlaneCoordinator {
     private static ArrayList<Plane> planes = new ArrayList<>();
 
-    public static ArrayList<Plane> getPlaness() {
+    public static ArrayList<Plane> getPlanes() {
         return planes;
     }
 
-    public static void setPlaness(ArrayList<Plane> planess) {
+    public static void setPlanes(ArrayList<Plane> planess) {
         PlaneCoordinator.planes = planess;
     }
 
@@ -24,6 +24,6 @@ public class PlaneCoordinator {
     }
 
     public static void removePlane(Plane plane){
-        getPlaness().remove(plane);
+        getPlanes().remove(plane);
     }
 }

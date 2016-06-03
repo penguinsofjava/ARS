@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.coordinator.PlaneCoordinator;
+import sample.model.Plane;
+import sample.model.Position;
 import sample.model.Radar;
 
 import java.util.ArrayList;
@@ -21,17 +24,25 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1358, 680));
         primaryStage.show();
 
-        loadRadars();
+        dummyContent();
     }
 
-    private void loadRadars() {
+    private void dummyContent() {
         ArrayList<Radar> dummyRadars = new ArrayList<Radar>() {{
-            add(new Radar(0, 20, 40, 500, new int[]{300, 100}));
-            add(new Radar(1, 10, 100, 1000, new int[]{400, 200}));
-            add(new Radar(2, null, null, 700, new int[]{800, 70}));
+//            add(new Radar(0, 20, 40, 500, new Position(300, 100)));
+            add(new Radar(1, 45, 100, 10000, new Position(400, 200)));
+//            add(new Radar(2, null, null, 700, new Position(800, 70)));
         }};
 
         controller.drawRadars(dummyRadars);
+
+        ArrayList<Plane> dummyPlanes = new ArrayList<Plane>() {{
+            add(new Plane("F-16", 1000, new Position[]{new Position(110, 230)}));
+            add(new Plane("F-16", 1000, new Position[]{new Position(400, 230)}));
+        }};
+
+        PlaneCoordinator.setPlanes(dummyPlanes);
+        controller.drawPlanes(PlaneCoordinator.getPlanes());
     }
 
     public static void main(String[] args) {

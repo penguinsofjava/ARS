@@ -29,7 +29,7 @@ public class RadarView extends Pane implements Positionable {
         setWidth(radar.getWidth() + 2); // +2 to avoid stroke cutoff
         setHeight(radar.getHeight() + 2);
 
-        setPosition(radar.getPosition()[0], radar.getPosition()[1]);
+        setPosition(radar.getPosition());
 
         draw();
 
@@ -46,9 +46,9 @@ public class RadarView extends Pane implements Positionable {
         return radar;
     }
 
-    private void setPosition(int x, int y) {
-        setLayoutX(x);
-        setLayoutY(y);
+    public void setPosition(int x, int y) {
+        setLayoutX(x - getWidth() / 2);
+        setLayoutY(y - getHeight() / 2);
     }
 
     @Override
@@ -75,8 +75,8 @@ public class RadarView extends Pane implements Positionable {
         if (scannerTimer == null) {
             scannerTimer = new Timer();
         }
-        scannerTimer.schedule(ScanTask.with(radar), 0, radar.getScanInterval());
         toggleAnimation(true);
+        scannerTimer.schedule(ScanTask.with(radar), 0, radar.getScanInterval() / (360 / radar.getScanAngle()));
     }
 
     public void stopScanning() {
@@ -90,8 +90,14 @@ public class RadarView extends Pane implements Positionable {
         if (transition == null) {
             transition = new RotateTransition(Duration.millis(radar.getScanInterval()), this);
             transition.setCycleCount(-1);
-            transition.setByAngle(360);
-            transition.setInterpolator(Interpolator.LINEAR);
+            transition.setByAngle(-360);
+            transition.setInterpolator(new Interpolator() {
+                @Override
+                protected double curve(double v) {
+                    radar.setScanAngleAlpha((int) (360 * v));
+                    return v; // Linear interpolation
+                }
+            });
         }
         if (animate) {
             transition.play();
@@ -108,7 +114,7 @@ public class RadarView extends Pane implements Positionable {
         graphicsContext.setLineWidth(1);
         graphicsContext.fillOval(1, 1, radar.getWidth(), radar.getHeight()); // Draw at (1, 1) to avoid stroke cutoff
         graphicsContext.strokeOval(1, 1, radar.getWidth(), radar.getHeight());
-        graphicsContext.strokeArc(1, 1, radar.getWidth(), radar.getHeight(), radar.getScanAngle(), 360 - radar.getRadius(), ArcType.ROUND);
+        graphicsContext.strokeArc(1, 1, radar.getWidth(), radar.getHeight(), radar.getScanAngle(), 360 - radar.getScanAngle(), ArcType.ROUND);
         getChildren().clear();
         getChildren().add(canvas);
     }

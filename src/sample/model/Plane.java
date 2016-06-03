@@ -6,15 +6,14 @@ import java.util.Arrays;
 public class Plane {
     private String name;
     private int speed;
-    private Type type;
+    private Type type = Type.HOSTILE;
     private Position[] path;
-    private Position position;
+    private Position position = new Position();
 
-    public Plane(String name, int speed, Position[] path, Position position) {
+    public Plane(String name, int speed, Position[] path) {
         this.name = name;
         this.speed = speed;
         this.path = path;
-        this.position = position;
     }
 
     public String getName() {
@@ -33,29 +32,36 @@ public class Plane {
         this.speed = speed;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public Position[] getPath() {
-        return path;
+        return path.length != 0 ? path : null;
     }
 
     public void setPath(Position[] path) {
         this.path = path;
     }
-
+    
     public Position getPosition() {
-        return position;
-    }
+		return position;
+	}
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
+	public void setPosition(Position position) {
+		this.position = position;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Plane{" +
                 "name='" + name + '\'' +
                 ", speed=" + speed +
                 ", path=" + Arrays.toString(path) +
-                ", position=" + position +
                 '}';
     }
 
