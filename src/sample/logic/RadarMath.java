@@ -11,7 +11,7 @@ public class RadarMath {
      *
      */
     public static boolean isPlaneInTheRadar(Plane plane, Radar radar) {
-        return isPlaneInTheAngle(plane, radar);
+        return isPlaneInTheCircle(plane, radar) && isPlaneInTheAngle(plane, radar);
     }
 
     /*
