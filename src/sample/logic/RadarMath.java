@@ -13,7 +13,7 @@ public class RadarMath {
 	 * 
 	 */
 	public static boolean isPlaneInTheRadar(Plane plane, Radar radar){
-		return isPlaneInTheCircle(plane, radar)  &&  isPlaneInTheAngle(plane, radar);
+		return isPlaneInTheAngle(plane, radar);
 	}
 
 	/*
@@ -37,15 +37,17 @@ public class RadarMath {
 	 */
 	public static boolean isPlaneInTheAngle(Plane plane, Radar radar){
 		
-		double planeX = plane.getPosition().getX();
-		double planeY = plane.getPosition().getY();
-		
-		double planeTheta = planeY <= 0
-				? Math.atan(Math.toRadians(planeY / planeX))
-				: Math.toRadians(180) + Math.atan(Math.toRadians(planeY / planeX));
+		double planeX = plane.getPosition().getX() - radar.getPosition().getX();
+		double planeY = -1 *plane.getPosition().getY() + radar.getPosition().getY();
 
-		double radarAlpha = radar.getScanAngleAlpha();
-		double radarBeta = radar.getScanAngle();
+
+		double planeTheta = Math.toRadians(160) + Math.atan(planeY/planeX);
+		/*double planeTheta = planeY <= 0
+				? Math.atan(Math.toRadians(planeY / planeX))
+				: + Math.atan(Math.toRadians(planeY / planeX));
+*/
+		double radarAlpha = Math.toRadians(radar.getScanAngleAlpha());
+		double radarBeta = Math.toRadians(radar.getScanAngle());
 
 		return planeTheta <= (radarAlpha + radarBeta) && planeTheta >= radarAlpha;
 	}
