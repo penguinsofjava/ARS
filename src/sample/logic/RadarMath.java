@@ -29,19 +29,19 @@ public class RadarMath {
 		
 		return xSideOfTheEquation + ySideOFTheEquation <= Math.pow(radarRadius, 2);
 	}
-	
+
 	
 	/*
 	 * This function checks if the points of the plane in the given angle or not.
 	 * If so returns TRUE, else FALSE.
 	 */
-	public static boolean isPlaneInTheAngle(Plane plane, Radar radar){
-		
+	public static boolean isPlaneInTheAngle(Plane plane, Radar radar) {
+
 		double planeX = plane.getPosition().getX() - radar.getPosition().getX();
-		double planeY = -1 *plane.getPosition().getY() + radar.getPosition().getY();
+		double planeY = -1 * plane.getPosition().getY() + radar.getPosition().getY();
 
 
-		double planeTheta = Math.toRadians(160) + Math.atan(planeY/planeX);
+		double planeTheta = Math.toRadians(160) + Math.atan(planeY / planeX);
 		/*double planeTheta = planeY <= 0
 				? Math.atan(Math.toRadians(planeY / planeX))
 				: + Math.atan(Math.toRadians(planeY / planeX));
@@ -51,38 +51,4 @@ public class RadarMath {
 
 		return planeTheta <= (radarAlpha + radarBeta) && planeTheta >= radarAlpha;
 	}
-	
-	
-	/*
-	 * This function generates Random planes.
-	 * There are 4 types of path for every plane.
-	 * Function generates random double number between 36-42 which are coordinates of TURKEY.
-	 * General formula is Y = Given X path + random double number.
-	 * 
-	 */
-	public void randomPathGenerator(){
-		
-		Random rand = new Random();
-		double basePointY;
-		double basePointX = 24;
-		double randomAddition = rand.nextDouble() * 7 + 36;
-		
-		int pathSelector = rand.nextInt(3) + 1;
-		
-		if(pathSelector == 1){
-			basePointY = (basePointX * basePointX) + randomAddition ;
-		}
-		else if(pathSelector == 2){
-			basePointY = Math.sin(basePointX) + randomAddition;
-		}
-		else if(pathSelector == 3){
-			basePointY = Math.abs(basePointX) + randomAddition;
-		}
-		else if(pathSelector == 4){
-			basePointY = rand.nextDouble() * 7 + 36;
-		}
-		
-	}
-
-
 }
