@@ -30,15 +30,15 @@ public class Main extends Application {
     private void dummyContent() {
         ArrayList<Radar> dummyRadars = new ArrayList<Radar>() {{
 //            add(new Radar(0, 20, 40, 500, new Position(300, 100)));
-            add(new Radar(1, 45, 100, 10000, new Position(400, 200)));
+            add(new Radar(1, 45, 250, 1000, new Position(400, 200)));
 //            add(new Radar(2, null, null, 700, new Position(800, 70)));
         }};
 
         controller.drawRadars(dummyRadars);
 
         ArrayList<Plane> dummyPlanes = new ArrayList<Plane>() {{
-            add(new Plane("F-16", 1000, new Position[]{new Position(110, 230)}));
-            add(new Plane("F-16", 1000, new Position[]{new Position(400, 230)}));
+            add(new Plane("F-16", 1000, new Position[]{new Position(200, 100)}));
+            add(new Plane("F-16", 1000, new Position[]{new Position(350, 350)}));
         }};
 
         PlaneCoordinator.setPlanes(dummyPlanes);
