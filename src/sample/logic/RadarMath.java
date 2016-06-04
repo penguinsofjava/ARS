@@ -5,16 +5,15 @@ import sample.model.Radar;
 
 public class RadarMath {
 
-    /*
+    /**
      * The function controls the 2 statement. If the coordinates of the plane satisfy the circle equation
      * AND corrects the angle equation, it means that the plane is in the radar.
-     *
      */
     public static boolean isPlaneInTheRadar(Plane plane, Radar radar) {
         return isPlaneInTheCircle(plane, radar) && isPlaneInTheAngle(plane, radar);
     }
 
-    /*
+    /**
      * This function controls whether coordinates of plane satisfy the circle equation or not.
      * If they satisfy, the function returns TRUE, else FALSE.
      */
@@ -27,7 +26,7 @@ public class RadarMath {
         return xSideOfTheEquation + ySideOFTheEquation <= Math.pow(radarRadius, 2);
     }
 
-    /*
+    /**
      * This function checks if the points of the plane in the given angle or not.
      * If so returns TRUE, else FALSE.
      */
