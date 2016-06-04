@@ -51,16 +51,16 @@ public class Plane {
     public void setPath(Position[] path) {
         this.path = path;
     }
-    
+
     public Position getPosition() {
-		return position;
-	}
+        return position;
+    }
 
-	public void setPosition(Position position) {
-		this.position = position;
-	}
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "Plane{" +
                 "model='" + model + '\'' +
@@ -94,4 +94,17 @@ public class Plane {
             }
         }
     }
+
+    public static String[] models = {
+            "F-16",
+            "F-14 Tomcat",
+            "F-22",
+            "F-35",
+            "F-104",
+            "F-5",
+            "Mig-21",
+            "Mig-29",
+            "SU-35",
+            "SU-29"
+    };
 }
