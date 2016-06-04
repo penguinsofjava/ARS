@@ -4,24 +4,28 @@ package sample.model;
 import java.util.Arrays;
 
 public class Plane {
-    private String name;
+    private String model;
     private int speed;
     private Type type = Type.HOSTILE;
     private Position[] path;
     private Position position = new Position();
 
-    public Plane(String name, int speed, Position[] path) {
-        this.name = name;
+    public Plane() {
+        /* empty */
+    }
+
+    public Plane(String model, int speed, Position[] path) {
+        this.model = model;
         this.speed = speed;
         this.path = path;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public int getSpeed() {
@@ -59,7 +63,7 @@ public class Plane {
 	@Override
     public String toString() {
         return "Plane{" +
-                "name='" + name + '\'' +
+                "model='" + model + '\'' +
                 ", speed=" + speed +
                 ", path=" + Arrays.toString(path) +
                 '}';
