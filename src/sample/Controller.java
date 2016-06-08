@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    public static final int MAP_HEIGHT = 480; // px
+
     public Pane map;
 
     @Override
