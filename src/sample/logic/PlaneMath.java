@@ -10,6 +10,7 @@ public class PlaneMath {
      * Function generates random double number between 36-42 which are coordinates of TURKEY.
      * General formula is Y = Given X path + random double number.
      */
+   /* This method will destroy itself in 10 second.
     public void randomPathGenerator() {
         Random rand = new Random();
         double basePointY;
@@ -27,5 +28,26 @@ public class PlaneMath {
         } else if (pathSelector == 4) {
             basePointY = rand.nextDouble() * 7 + 36;
         }
+
+    }
+    */
+
+    public static int getYCoordinate(int xValue, int pathNumber, int yAddition){
+        int yValue;
+        if(pathNumber == 1 ){
+            yValue = (xValue * xValue) + yAddition;
+        }
+        else if(pathNumber == 2){
+            yValue = Math.sin(xValue) + yAddition;
+        }
+        else if(pathNumber == 3){
+            yValue = Math.abs(xValue) + yAddition;
+        }
+        else if(pathNumber == 4){
+            yValue = yAddition;
+        }
+
+        return yValue;
+
     }
 }
