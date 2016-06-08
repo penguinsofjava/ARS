@@ -1,27 +1,31 @@
 package sample.model;
 
-
-import java.util.Arrays;
-
 public class Plane {
-    private String name;
+    private String model;
     private int speed;
     private Type type = Type.HOSTILE;
-    private Position[] path;
     private Position position = new Position();
+    private int pathType;
+    private int yAnchor;
 
-    public Plane(String name, int speed, Position[] path) {
-        this.name = name;
+    public Plane() {
+        /* empty */
+    }
+
+    public Plane(String model, int speed, Type type, int pathType, int yAnchor) {
+        this.model = model;
         this.speed = speed;
-        this.path = path;
+        this.type = type;
+        this.pathType = pathType;
+        this.yAnchor = yAnchor;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public int getSpeed() {
@@ -40,28 +44,44 @@ public class Plane {
         this.type = type;
     }
 
-    public Position[] getPath() {
-        return path.length != 0 ? path : null;
-    }
-
-    public void setPath(Position[] path) {
-        this.path = path;
-    }
-    
     public Position getPosition() {
-		return position;
-	}
+        return position;
+    }
 
-	public void setPosition(Position position) {
-		this.position = position;
-	}
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
-	@Override
+    public int getPathType() {
+        return pathType;
+    }
+
+    public void setPathType(int pathType) {
+        this.pathType = pathType;
+    }
+
+    public int getYAnchor() {
+        return yAnchor;
+    }
+
+    public void setYAnchor(int yAnchor) {
+        this.yAnchor = yAnchor;
+    }
+
+    public static String[] getModels() {
+        return models;
+    }
+
+    public static void setModels(String[] models) {
+        Plane.models = models;
+    }
+
+    @Override
     public String toString() {
         return "Plane{" +
-                "name='" + name + '\'' +
+                "model='" + model + '\'' +
                 ", speed=" + speed +
-                ", path=" + Arrays.toString(path) +
+                ", type=" + type.toString() +
                 '}';
     }
 
@@ -90,4 +110,17 @@ public class Plane {
             }
         }
     }
+
+    public static String[] models = {
+            "F-16",
+            "F-14 Tomcat",
+            "F-22",
+            "F-35",
+            "F-104",
+            "F-5",
+            "Mig-21",
+            "Mig-29",
+            "SU-35",
+            "SU-29"
+    };
 }
