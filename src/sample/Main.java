@@ -8,8 +8,9 @@ import javafx.stage.Stage;
 import sample.coordinator.PlaneCoordinator;
 import sample.coordinator.PlaneFactory;
 import sample.coordinator.RadarCoordinator;
+import sample.model.Plane;
 
-public class Main extends Application {
+public class Main extends Application implements PlaneCoordinator.OnPlaneAddedListener, PlaneCoordinator.OnPlaneRemovedListener {
     private static Controller controller;
 
     @Override
@@ -25,19 +26,17 @@ public class Main extends Application {
     }
 
     private void dummyContent() {
-            RadarCoordinator radarCoordinators = new RadarCoordinator();
-//            add(new Radar(0, 20, 40, 500, new Position(300, 100)));
-            //add(new Radar(1, 45, 250, 1000, new Position(400, 200)));
+        RadarCoordinator radarCoordinators = new RadarCoordinator();
         radarCoordinators.setPath("radarRecord.txt");
-          radarCoordinators.openFile();
+        radarCoordinators.openFile();
         radarCoordinators.readRecords();
-//            add(new Radar(2, null, null, 700, new Position(800, 70)));
 
         controller.drawRadars(RadarCoordinator.getRadars());
 
         PlaneFactory.start();
 
-        controller.drawPlanes(PlaneCoordinator.getPlanes());
+        PlaneCoordinator.getAddListeners().add(this);
+        PlaneCoordinator.getRemoveListeners().add(this);
     }
 
     public static Controller getController() {
@@ -46,5 +45,15 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void onPlaneAdded(Plane plane) {
+        controller.drawPlane(plane);
+    }
+
+    @Override
+    public void onPlaneRemoved(Plane plane) {
+        controller.removePlane(plane);
     }
 }

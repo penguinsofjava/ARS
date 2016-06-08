@@ -31,9 +31,7 @@ public class ScanTask extends TimerTask {
 
         for(Plane plane : PlaneCoordinator.getPlanes()){
         	if(RadarMath.isPlaneInTheRadar(plane, radar)){
-        		if(plane.getType() == Plane.Type.HOSTILE){
-        			System.out.println("Yakaladım looo");
-        		}
+        		System.out.println("Caught ya' " + plane.getType().toString());
         	}
         }
     }

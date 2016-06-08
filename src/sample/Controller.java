@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import sample.model.Plane;
 import sample.model.Radar;
@@ -31,13 +33,29 @@ public class Controller implements Initializable {
 
     public void drawPlanes(List<Plane> planes) {
         for (Plane plane : planes) {
-            addPlane(plane);
+            drawPlane(plane);
         }
     }
 
-    public void addPlane(Plane plane) {
-        PlaneView planeView = new PlaneView(plane);
-        map.getChildren().add(planeView);
-        planeView.startFlying();
+    public void drawPlane(Plane plane) {
+        final PlaneView planeView = new PlaneView(plane);
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                map.getChildren().add(planeView);
+                planeView.startFlying();
+            }
+        });
+    }
+
+    /**
+     * Needs testing
+     */
+    public void removePlane(Plane plane) {
+        for (int i = 0; i < map.getChildren().size(); i++) {
+            Node child = map.getChildren().get(i);
+            if (child instanceof PlaneView && ((PlaneView) child).getPlane() == plane) {
+                map.getChildren().remove(child);
+            }
+        }
     }
 }

@@ -38,7 +38,7 @@ public class PlaneFactory {
         String model = Plane.models[randomIndex];
 
         /* Random speed */
-        int speed = StaticRandom.get().nextInt(6);
+        int speed = StaticRandom.get().nextInt(4);
 
         /* Random type */
         int typeIndex = StaticRandom.get().nextInt(3);

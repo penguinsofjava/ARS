@@ -29,14 +29,20 @@ public class PlaneView extends Pane implements Positionable {
         setWidth(WIDTH);
         setHeight(HEIGHT);
 
+        setPosition(new Position(0, plane.getYAnchor()));
+
         draw();
+    }
+
+    public Plane getPlane() {
+        return plane;
     }
 
     public void startFlying() {
         if (flyTimer == null) {
             flyTimer = new Timer();
         }
-        flyTimer.schedule(FlyTask.with(this), 0, plane.getSpeed());
+        flyTimer.schedule(FlyTask.with(this), 0, 100);
     }
 
     public void stopFlying() {
@@ -66,12 +72,12 @@ public class PlaneView extends Pane implements Positionable {
     	setY((int) getLayoutY() + by);
     }
     
-    private void setX(int x) {
+    public void setX(int x) {
     	setLayoutX(x);
     	plane.getPosition().setX(x);
     }
     
-    private void setY(int y) {
+    public void setY(int y) {
     	setLayoutY(y);
     	plane.getPosition().setY(y);
     }
