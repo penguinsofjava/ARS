@@ -1,5 +1,7 @@
 package sample.model;
 
+
+
 public class Radar {
     private int id;
     private int scanAngle = 20; // default (degrees)
@@ -8,11 +10,15 @@ public class Radar {
     private int scanAngleAlpha;
     private Position position;
 
+
+
+
     private ChangeListener listener;
     private Color color = Color.ACTIVE;
 
     public Radar() {
         /* Empty - Not sure if we'll ever need this... Keeping it for now... */
+
     }
 
     public Radar(int id, Integer scanAngle, Integer radius, Integer scanInterval, Position position) {
@@ -116,7 +122,10 @@ public class Radar {
         }
     }
 
+    // file
     public interface ChangeListener {
         void onChange();
     }
-}
+
+
+    }
