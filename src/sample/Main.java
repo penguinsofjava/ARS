@@ -6,15 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.coordinator.PlaneCoordinator;
+import sample.coordinator.PlaneFactory;
 import sample.coordinator.RadarCoordinator;
-import sample.model.Plane;
-import sample.model.Position;
-import sample.model.Radar;
-
-import java.util.ArrayList;
 
 public class Main extends Application {
-    private Controller controller;
+    private static Controller controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -37,16 +33,15 @@ public class Main extends Application {
         radarCoordinators.readRecords();
 //            add(new Radar(2, null, null, 700, new Position(800, 70)));
 
-
         controller.drawRadars(RadarCoordinator.getRadars());
 
-        ArrayList<Plane> dummyPlanes = new ArrayList<Plane>() {{
-            add(new Plane("F-16", 1000, new Position[]{new Position(200, 100)}));
-            add(new Plane("F-16", 1000, new Position[]{new Position(350, 350)}));
-        }};
+        PlaneFactory.start();
 
-        PlaneCoordinator.setPlanes(dummyPlanes);
         controller.drawPlanes(PlaneCoordinator.getPlanes());
+    }
+
+    public static Controller getController() {
+        return controller;
     }
 
     public static void main(String[] args) {

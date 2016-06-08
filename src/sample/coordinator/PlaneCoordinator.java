@@ -19,10 +19,6 @@ public class PlaneCoordinator {
         planes.add(plane);
     }
 
-    public static void addPlane(){
-    //TODO: Add random plane
-    }
-
     public static void removePlane(Plane plane){
         getPlanes().remove(plane);
     }

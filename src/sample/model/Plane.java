@@ -1,23 +1,23 @@
 package sample.model;
 
-
-import java.util.Arrays;
-
 public class Plane {
     private String model;
     private int speed;
     private Type type = Type.HOSTILE;
-    private Position[] path;
     private Position position = new Position();
+    private int pathType;
+    private int yAnchor;
 
     public Plane() {
         /* empty */
     }
 
-    public Plane(String model, int speed, Position[] path) {
+    public Plane(String model, int speed, Type type, int pathType, int yAnchor) {
         this.model = model;
         this.speed = speed;
-        this.path = path;
+        this.type = type;
+        this.pathType = pathType;
+        this.yAnchor = yAnchor;
     }
 
     public String getModel() {
@@ -44,14 +44,6 @@ public class Plane {
         this.type = type;
     }
 
-    public Position[] getPath() {
-        return path.length != 0 ? path : null;
-    }
-
-    public void setPath(Position[] path) {
-        this.path = path;
-    }
-
     public Position getPosition() {
         return position;
     }
@@ -60,12 +52,36 @@ public class Plane {
         this.position = position;
     }
 
+    public int getPathType() {
+        return pathType;
+    }
+
+    public void setPathType(int pathType) {
+        this.pathType = pathType;
+    }
+
+    public int getYAnchor() {
+        return yAnchor;
+    }
+
+    public void setYAnchor(int yAnchor) {
+        this.yAnchor = yAnchor;
+    }
+
+    public static String[] getModels() {
+        return models;
+    }
+
+    public static void setModels(String[] models) {
+        Plane.models = models;
+    }
+
     @Override
     public String toString() {
         return "Plane{" +
                 "model='" + model + '\'' +
                 ", speed=" + speed +
-                ", path=" + Arrays.toString(path) +
+                ", type=" + type.toString() +
                 '}';
     }
 
