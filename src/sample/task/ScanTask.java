@@ -32,7 +32,7 @@ public class ScanTask extends TimerTask {
         for(Plane plane : PlaneCoordinator.getPlanes()){
         	if(RadarMath.isPlaneInTheRadar(plane, radar)){
         		if(plane.getType() == Plane.Type.HOSTILE){
-        			System.out.println("Yakalad�m looo");
+        			System.out.println("Yakaladım looo");
         		}
         	}
         }
