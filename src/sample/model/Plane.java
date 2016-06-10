@@ -1,12 +1,29 @@
 package sample.model;
 
+import javafx.scene.paint.Color;
+
 public class Plane {
+    public static final String[] MODELS = {
+            "F-16",
+            "F-14 Tomcat",
+            "F-22",
+            "F-35",
+            "F-104",
+            "F-5",
+            "Mig-21",
+            "Mig-29",
+            "SU-35",
+            "SU-29"
+    };
+
     private String model;
     private int speed;
     private Type type = Type.HOSTILE;
     private Position position = new Position();
     private int pathType;
     private int yAnchor;
+
+    private OnCaughtOnRadarListener listener;
 
     public Plane() {
         /* empty */
@@ -68,12 +85,12 @@ public class Plane {
         this.yAnchor = yAnchor;
     }
 
-    public static String[] getModels() {
-        return models;
+    public void setListener(OnCaughtOnRadarListener listener) {
+        this.listener = listener;
     }
 
-    public static void setModels(String[] models) {
-        Plane.models = models;
+    public OnCaughtOnRadarListener getListener() {
+        return listener;
     }
 
     @Override
@@ -86,12 +103,18 @@ public class Plane {
     }
 
     public enum Type {
-        FRIENDLY("friendly"), HOSTILE("hostile"), UNKNOWN("unknown");
+        FRIENDLY("friendly", "#00E676"), HOSTILE("hostile", "#FF1744"), UNKNOWN("unknown", "#455A64");
 
         private String value;
+        private Color indicatorColor;
 
-        Type(String value) {
+        Type(String value, String indicatorColorHex) {
             this.value = value;
+            this.indicatorColor = Color.web(indicatorColorHex);
+        }
+
+        public Color getIndicatorColor() {
+            return indicatorColor;
         }
 
         @Override
@@ -111,16 +134,7 @@ public class Plane {
         }
     }
 
-    public static String[] models = {
-            "F-16",
-            "F-14 Tomcat",
-            "F-22",
-            "F-35",
-            "F-104",
-            "F-5",
-            "Mig-21",
-            "Mig-29",
-            "SU-35",
-            "SU-29"
-    };
+    public interface OnCaughtOnRadarListener {
+        void onCaughtOnRadar(Radar radar);
+    }
 }

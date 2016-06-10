@@ -5,13 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.controller.MainController;
 import sample.coordinator.PlaneCoordinator;
 import sample.coordinator.PlaneFactory;
 import sample.coordinator.RadarCoordinator;
 import sample.model.Plane;
 
 public class Main extends Application implements PlaneCoordinator.OnPlaneAddedListener, PlaneCoordinator.OnPlaneRemovedListener {
-    private static Controller controller;
+    private static MainController controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,6 +26,11 @@ public class Main extends Application implements PlaneCoordinator.OnPlaneAddedLi
         dummyContent();
     }
 
+    @Override
+    public void stop() throws Exception {
+        System.exit(0);
+    }
+
     private void dummyContent() {
         RadarCoordinator radarCoordinators = new RadarCoordinator();
         radarCoordinators.setPath("radarRecord.txt");
@@ -33,18 +39,14 @@ public class Main extends Application implements PlaneCoordinator.OnPlaneAddedLi
 
         controller.drawRadars(RadarCoordinator.getRadars());
 
-        PlaneFactory.start();
-
         PlaneCoordinator.getAddListeners().add(this);
         PlaneCoordinator.getRemoveListeners().add(this);
+
+        PlaneFactory.start();
     }
 
-    public static Controller getController() {
+    public static MainController getController() {
         return controller;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     @Override
@@ -55,5 +57,9 @@ public class Main extends Application implements PlaneCoordinator.OnPlaneAddedLi
     @Override
     public void onPlaneRemoved(Plane plane) {
         controller.removePlane(plane);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

@@ -5,6 +5,7 @@ import javafx.animation.RotateTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.util.Duration;
 import sample.model.Position;
@@ -16,7 +17,10 @@ import java.util.Timer;
 
 public class RadarView extends Pane implements Positionable {
     private Radar radar;
+
     private Timer scannerTimer;
+    private boolean scanning;
+
     private RotateTransition transition;
 
     public RadarView(Radar radar) {
@@ -76,7 +80,9 @@ public class RadarView extends Pane implements Positionable {
             scannerTimer = new Timer();
         }
         toggleAnimation(true);
+        radar.setScanAngleAlpha(45);
         scannerTimer.schedule(ScanTask.with(radar), 0, radar.getScanInterval() / (360 / radar.getScanAngle()));
+        scanning = true;
     }
 
     public void stopScanning() {
@@ -84,6 +90,11 @@ public class RadarView extends Pane implements Positionable {
             scannerTimer.cancel();
         }
         toggleAnimation(false);
+        scanning = false;
+    }
+
+    public boolean isScanning() {
+        return scanning;
     }
 
     private void toggleAnimation(boolean animate) {
@@ -109,8 +120,8 @@ public class RadarView extends Pane implements Positionable {
     private void draw() {
         Canvas canvas = new Canvas(radar.getWidth() + 2, radar.getHeight() + 2); // +2 to avoid stroke cutoff
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        graphicsContext.setFill(radar.getColor().getFill());
-        graphicsContext.setStroke(radar.getColor().getStroke());
+        graphicsContext.setFill(Color.web("#546E7A", 0.3));
+        graphicsContext.setStroke(Color.web("#455A64", 0.3));
         graphicsContext.setLineWidth(1);
         graphicsContext.fillOval(1, 1, radar.getWidth(), radar.getHeight()); // Draw at (1, 1) to avoid stroke cutoff
         graphicsContext.strokeOval(1, 1, radar.getWidth(), radar.getHeight());

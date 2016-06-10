@@ -34,12 +34,12 @@ public class PlaneCoordinator {
         return planes;
     }
 
-    public static void addPlane(Plane plane){
+    public static void addPlane(Plane plane) {
         planes.add(plane);
         notifyAddedListeners(plane);
     }
 
-    public static void removePlane(Plane plane){
+    public static void removePlane(Plane plane) {
         planes.remove(plane);
         notifyRemovedListeners(plane);
     }
