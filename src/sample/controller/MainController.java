@@ -38,7 +38,6 @@ public class MainController implements Initializable {
                 return new RadarListCell();
             }
         });
-        radarsList.setSelectionModel(null);
     }
 
     public void drawRadars(List<Radar> radars) {

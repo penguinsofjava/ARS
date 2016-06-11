@@ -22,6 +22,7 @@ public class Plane {
     private Position position = new Position();
     private int pathType;
     private int yAnchor;
+    private int pathExtensionConstant;
 
     private OnCaughtOnRadarListener listener;
 
@@ -35,6 +36,11 @@ public class Plane {
         this.type = type;
         this.pathType = pathType;
         this.yAnchor = yAnchor;
+    }
+
+    public Plane(String model, int speed, Type type, int pathType, int yAnchor, int pathExtensionConstant) {
+        this(model, speed, type, pathType, yAnchor);
+        this.pathExtensionConstant = pathExtensionConstant;
     }
 
     public String getModel() {
@@ -83,6 +89,14 @@ public class Plane {
 
     public void setYAnchor(int yAnchor) {
         this.yAnchor = yAnchor;
+    }
+
+    public int getPathExtensionConstant() {
+        return pathExtensionConstant;
+    }
+
+    public void setPathExtensionConstant(int pathExtensionConstant) {
+        this.pathExtensionConstant = pathExtensionConstant;
     }
 
     public void setListener(OnCaughtOnRadarListener listener) {

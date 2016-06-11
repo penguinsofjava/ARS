@@ -38,7 +38,7 @@ public class PlaneFactory {
         String model = Plane.MODELS[randomIndex];
 
         /* Random speed */
-        int speed = StaticRandom.get().nextInt(5);
+        int speed = StaticRandom.get().nextInt(5) + 1;
 
         /* Random type */
         int typeIndex = StaticRandom.get().nextInt(3);
@@ -51,11 +51,17 @@ public class PlaneFactory {
 
         /* Random path type */
         int pathType = StaticRandom.get().nextInt(4) + 1;
+        System.out.println("Plane type: " + pathType);
+
+        int pathExtensionConstant = 1000;
+        if (pathType == 1) {
+             pathExtensionConstant = StaticRandom.get().nextInt(200) + 1500;
+        }
 
         /* Random y anchor */
         int yAnchor = StaticRandom.get().nextInt(Main.getController().getMapHeight() + 1);
 
-        Plane plane = new Plane(model, speed, type, pathType, yAnchor);
+        Plane plane = new Plane(model, speed, type, pathType, yAnchor, pathExtensionConstant);
 
         PlaneCoordinator.addPlane(plane);
     }
