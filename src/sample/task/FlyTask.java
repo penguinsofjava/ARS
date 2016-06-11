@@ -30,7 +30,8 @@ public class FlyTask extends TimerTask {
                 PlaneMath.getYCoordinate(
                         planeView.getPosition().getX(),
                         planeView.getPlane().getPathType(),
-                        planeView.getPlane().getYAnchor()
+                        planeView.getPlane().getYAnchor(),
+                        planeView.getPlane().getPathExtensionConstant()
                 )
         );
     }

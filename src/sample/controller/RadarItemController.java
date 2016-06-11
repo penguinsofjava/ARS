@@ -23,7 +23,7 @@ public class RadarItemController implements Initializable {
     }
 
     public void setPosition(Position position) {
-        this.position.setText("(" + position.getY() + ", " + position.getY() + ")");
+        this.position.setText("(" + position.getX() + ", " + position.getY() + ")");
     }
 
     public void setStartStopButtonText(String text) {

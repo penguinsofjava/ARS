@@ -42,7 +42,7 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
         plane.setListener(this);
 
-        setOpacity(0);
+//        setOpacity(0); // TODO: Uncomment
 
         draw();
     }
@@ -67,7 +67,7 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
     @Override
     public void onCaughtOnRadar(Radar radar) {
-        animateRadarShowUp();
+//        animateRadarShowUp(); // TODO: Uncomment
     }
 
     private void animateRadarShowUp() {
@@ -120,8 +120,8 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
     }
 
     private void notifyPositionChanged() {
-        if (getPosition().getY() >= Main.getController().getMapHeight() - getHeight()
-                || getPosition().getX() >= Main.getController().getMapWidth() - getWidth()) {
+        if (getLayoutY() >= Main.getController().getMapHeight() - getHeight()
+                || getLayoutX() >= Main.getController().getMapWidth() - getWidth()) {
             System.out.println("Plane out of map. Removing...");
             stopFlying();
             PlaneCoordinator.removePlane(plane);
