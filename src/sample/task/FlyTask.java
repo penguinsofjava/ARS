@@ -1,5 +1,6 @@
 package sample.task;
 
+import sample.logic.PlaneMath;
 import sample.model.Plane;
 import sample.view.PlaneView;
 
@@ -24,6 +25,13 @@ public class FlyTask extends TimerTask {
 
     @Override
     public void run() {
-        // TODO: Flight logic
+        planeView.moveInX(planeView.getPlane().getSpeed());
+        planeView.setY(
+                PlaneMath.getYCoordinate(
+                        planeView.getPosition().getX(),
+                        planeView.getPlane().getPathType(),
+                        planeView.getPlane().getYAnchor()
+                )
+        );
     }
 }

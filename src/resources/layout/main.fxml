@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -7,9 +9,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-    <VBox prefWidth="200.0" />
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.MainController">
+   <VBox prefHeight="200.0" prefWidth="200.0">
+      <children>
+         <Label minHeight="25.0" text="Radars">
+            <font>
+               <Font size="18.0" />
+            </font>
+            <VBox.margin>
+               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            </VBox.margin>
+         </Label>
+         <ListView fx:id="radarsList" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      </children>
+   </VBox>
     <VBox>
         <StackPane>
             <ImageView fitHeight="480.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
@@ -19,7 +34,7 @@
 
             </Pane>
         </StackPane>
-        <ListView prefHeight="200.0" prefWidth="200.0" />
+        <ListView fx:id="logList" prefHeight="200.0" prefWidth="200.0" />
     </VBox>
     <VBox prefWidth="200.0" />
 </HBox>

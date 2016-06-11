@@ -1,6 +1,6 @@
 package sample.coordinator;
 
-import sample.Controller;
+import sample.Main;
 import sample.model.Plane;
 import sample.util.StaticRandom;
 
@@ -21,7 +21,7 @@ public class PlaneFactory {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                addPlane();
+                generatePlane();
             }
         }, 0, interval);
     }
@@ -32,13 +32,13 @@ public class PlaneFactory {
         }
     }
 
-    private static void addPlane() {
+    public static void generatePlane() {
         /* Random model */
-        int randomIndex = StaticRandom.get().nextInt(Plane.models.length);
-        String model = Plane.models[randomIndex];
+        int randomIndex = StaticRandom.get().nextInt(Plane.MODELS.length);
+        String model = Plane.MODELS[randomIndex];
 
         /* Random speed */
-        int speed = StaticRandom.get().nextInt(6);
+        int speed = StaticRandom.get().nextInt(5);
 
         /* Random type */
         int typeIndex = StaticRandom.get().nextInt(3);
@@ -50,10 +50,10 @@ public class PlaneFactory {
         }
 
         /* Random path type */
-        int pathType = StaticRandom.get().nextInt(5);
+        int pathType = StaticRandom.get().nextInt(4) + 1;
 
         /* Random y anchor */
-        int yAnchor = StaticRandom.get().nextInt(Controller.MAP_HEIGHT + 1);
+        int yAnchor = StaticRandom.get().nextInt(Main.getController().getMapHeight() + 1);
 
         Plane plane = new Plane(model, speed, type, pathType, yAnchor);
 

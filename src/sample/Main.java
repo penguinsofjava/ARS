@@ -5,12 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.controller.MainController;
 import sample.coordinator.PlaneCoordinator;
 import sample.coordinator.PlaneFactory;
 import sample.coordinator.RadarCoordinator;
+import sample.model.Plane;
 
-public class Main extends Application {
-    private static Controller controller;
+public class Main extends Application implements PlaneCoordinator.OnPlaneAddedListener, PlaneCoordinator.OnPlaneRemovedListener {
+    private static MainController controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -24,24 +26,37 @@ public class Main extends Application {
         dummyContent();
     }
 
+    @Override
+    public void stop() throws Exception {
+        System.exit(0);
+    }
+
     private void dummyContent() {
-            RadarCoordinator radarCoordinators = new RadarCoordinator();
-//            add(new Radar(0, 20, 40, 500, new Position(300, 100)));
-            //add(new Radar(1, 45, 250, 1000, new Position(400, 200)));
+        RadarCoordinator radarCoordinators = new RadarCoordinator();
         radarCoordinators.setPath("radarRecord.txt");
-          radarCoordinators.openFile();
+        radarCoordinators.openFile();
         radarCoordinators.readRecords();
-//            add(new Radar(2, null, null, 700, new Position(800, 70)));
 
         controller.drawRadars(RadarCoordinator.getRadars());
 
-        PlaneFactory.start();
+        PlaneCoordinator.getAddListeners().add(this);
+        PlaneCoordinator.getRemoveListeners().add(this);
 
-        controller.drawPlanes(PlaneCoordinator.getPlanes());
+        PlaneFactory.start();
     }
 
-    public static Controller getController() {
+    public static MainController getController() {
         return controller;
+    }
+
+    @Override
+    public void onPlaneAdded(Plane plane) {
+        controller.drawPlane(plane);
+    }
+
+    @Override
+    public void onPlaneRemoved(Plane plane) {
+        controller.removePlane(plane);
     }
 
     public static void main(String[] args) {
