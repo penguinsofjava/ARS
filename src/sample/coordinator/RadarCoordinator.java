@@ -1,22 +1,18 @@
 package sample.coordinator;
 
-import sample.model.Position;
 import sample.model.Radar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 
 public class RadarCoordinator {
+    private static final File STORE_FILE = new File("files/radar.txt");
+
     private static ArrayList<Radar> radars = new ArrayList<>();
 
-    // file
-    private Scanner input;
-    private Formatter output;
-    private String path;
     public static ArrayList<Radar> getRadars() {
         return radars;
     }
@@ -32,73 +28,31 @@ public class RadarCoordinator {
     }
 
     public static void loadRadars() {
-        // TODO: Read from file
+        try {
+            Scanner input = new Scanner(STORE_FILE);
+
+            radars.clear();
+            while (input.hasNext()) {
+                Radar radar = new Radar();
+                radar.setId(input.nextInt());
+                radar.setScanAngle(input.nextInt());
+                radar.setRadius(input.nextInt());
+                radar.setScanInterval(input.nextInt());
+                radar.setPosition(input.nextInt(), input.nextInt());
+                radars.add(radar);
+            }
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            System.out.println("You do not have write access to this file!");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File Not Found!");
+        } catch (NoSuchElementException nse) {
+            System.out.println("No such element exception occurred");
+        }
     }
 
     public static void saveRadars() {
         // TODO: Save to file
-    }
-
-    public Scanner getInput() {
-        return input;
-    }
-
-    public void setInput(Scanner input) {
-        this.input = input;
-    }
-
-    public Formatter getOutput() {
-        return output;
-    }
-
-    public void setOutput(Formatter output) {
-        this.output = output;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-
-    public void openFile() {
-        try {
-            input = new Scanner(new File(path));
-        } catch (SecurityException e) {
-            System.out.println("You do not have write access to this file!");
-        } catch (FileNotFoundException e) {
-            System.out.println("File Not Found!");
-            System.exit(1);
-        }
-    }
-
-    public void readRecords() {
-        radars.clear();
-        Radar rdr;
-        try {
-            while (input.hasNext()) {
-
-                int id = input.nextInt();
-                int scanAngle = input.nextInt();
-                int radius = input.nextInt();
-                int scanInterval = input.nextInt();
-                int x = input.nextInt();
-                int y = input.nextInt();
-
-                rdr = new Radar(id, scanAngle,radius,scanInterval, new Position(x,y));
-
-
-                radars.add(rdr);
-
-            }
-        } catch (NoSuchElementException nse) {
-            System.out.println("No such element exception occured");
-        } catch (IllegalStateException ise) {
-            System.out.println("IllegalStateException");
-        }
-
     }
 }

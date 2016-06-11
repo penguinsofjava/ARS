@@ -22,6 +22,14 @@ public class Radar {
         this.position = position;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getScanAngle() {
         return scanAngle;
     }

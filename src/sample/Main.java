@@ -23,6 +23,8 @@ public class Main extends Application implements PlaneCoordinator.OnPlaneAddedLi
         primaryStage.setScene(new Scene(root, 1358, 680));
         primaryStage.show();
 
+        RadarCoordinator.loadRadars();
+
         dummyContent();
     }
 
@@ -32,11 +34,6 @@ public class Main extends Application implements PlaneCoordinator.OnPlaneAddedLi
     }
 
     private void dummyContent() {
-        RadarCoordinator radarCoordinators = new RadarCoordinator();
-        radarCoordinators.setPath("radarRecord.txt");
-        radarCoordinators.openFile();
-        radarCoordinators.readRecords();
-
         controller.drawRadars(RadarCoordinator.getRadars());
 
         PlaneCoordinator.getAddListeners().add(this);
