@@ -1,8 +1,13 @@
 package sample.coordinator;
 
 import sample.model.Plane;
+import sample.model.Radar;
+import sample.view.InterceptorPlaneView;
+import sample.view.PlaneView;
 
 import java.util.ArrayList;
+
+import static sample.Main.getController;
 
 public class PlaneCoordinator {
     private static ArrayList<Plane> planes = new ArrayList<>();
@@ -42,6 +47,11 @@ public class PlaneCoordinator {
     public static void removePlane(Plane plane) {
         planes.remove(plane);
         notifyRemovedListeners(plane);
+    }
+
+    public static void interceptPlane(Plane target, Radar radar) {
+        InterceptorPlaneView interceptor = new InterceptorPlaneView(PlaneFactory.generateInterceptor(target), target, radar);
+        interceptor.startFlying();
     }
 
     public interface OnPlaneAddedListener {

@@ -24,7 +24,7 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
     private Plane plane;
 
-    private Timer flyTimer;
+   protected Timer flyTimer;
 
     private FadeTransition radarShowTransition;
 

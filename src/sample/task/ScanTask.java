@@ -38,6 +38,10 @@ public class ScanTask extends TimerTask {
                     plane.getListener().onCaughtOnRadar(radar);
                 }
 
+//                if (plane.getType() == Plane.Type.HOSTILE) {
+                    PlaneCoordinator.interceptPlane(plane, radar);
+//                }
+
                 getController().logMessage(
                         "Radar@(" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ") detected "
                                 + plane.getType().toString() + " plane at (" + plane.getPosition().getX() + ", " + plane.getPosition().getY() + ")"

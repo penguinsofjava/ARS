@@ -76,6 +76,16 @@ public class MainController implements Initializable {
         return result;
     }
 
+    public ArrayList<PlaneView> getPlaneViews() {
+        ArrayList<PlaneView> result = new ArrayList<>();
+        for (Node child : map.getChildren()) {
+            if (child instanceof PlaneView) {
+                result.add((PlaneView) child);
+            }
+        }
+        return result;
+    }
+
     public int getMapWidth() {
         return (int) map.getWidth();
     }

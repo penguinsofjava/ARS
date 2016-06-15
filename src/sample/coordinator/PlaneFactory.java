@@ -2,6 +2,7 @@ package sample.coordinator;
 
 import sample.Main;
 import sample.model.Plane;
+import sample.model.Position;
 import sample.util.StaticRandom;
 
 import java.util.Timer;
@@ -21,7 +22,7 @@ public class PlaneFactory {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                generatePlane();
+                addRandomPlane();
             }
         }, 0, interval);
     }
@@ -32,7 +33,11 @@ public class PlaneFactory {
         }
     }
 
-    public static void generatePlane() {
+    public static void addRandomPlane() {
+        PlaneCoordinator.addPlane(generatePlane());
+    }
+
+    public static Plane generatePlane() {
         /* Random model */
         int randomIndex = StaticRandom.get().nextInt(Plane.MODELS.length);
         String model = Plane.MODELS[randomIndex];
@@ -61,8 +66,16 @@ public class PlaneFactory {
         /* Random y anchor */
         int yAnchor = StaticRandom.get().nextInt(Main.getController().getMapHeight() + 1);
 
-        Plane plane = new Plane(model, speed, type, pathType, yAnchor, pathExtensionConstant);
+        return new Plane(model, speed, type, pathType, yAnchor, pathExtensionConstant);
+    }
 
-        PlaneCoordinator.addPlane(plane);
+    public static Plane generateInterceptor(Plane target) {
+        /* Speed */
+        int speed = target.getSpeed() + 1;
+
+        /* Type */
+        Plane.Type type = Plane.Type.INTERCEPTOR;
+
+        return new Plane(Plane.MODELS[0], speed, type, 0, 0, 0);
     }
 }
