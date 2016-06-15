@@ -25,6 +25,11 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
     private FadeTransition radarShowTransition;
 
+    /**
+     * Defines whether the plane should be hidden on map until detected and slowly faded away after detection.
+     */
+    private boolean shouldAnimateVisibility = true;
+
     public PlaneView(Plane plane) {
         setPlane(plane);
     }
@@ -40,9 +45,10 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
         plane.setListener(this);
 
         if (plane instanceof InterceptorPlane) {
+            shouldAnimateVisibility = false;
             setPosition(((InterceptorPlane) plane).getAirbase().getPosition());
         } else {
-//        setOpacity(0); // TODO: Uncomment
+            setOpacity(0);
         }
 
         draw();
@@ -70,9 +76,23 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
         }
     }
 
+    /**
+     * Toggles whether this plane is being tracked. A usage case of this is when the plane is of {@link Plane.Type#HOSTILE}
+     * and is being tracked by an {@link Plane.Type#INTERCEPTOR} plane. Marking this as true causes the plane to never
+     * "fade away" on the map.
+     */
+    public void setBeingTracked(boolean tracked) {
+        shouldAnimateVisibility = !tracked;
+        if (tracked) {
+            setOpacity(1);
+        }
+    }
+
     @Override
     public void onCaughtOnRadar(Radar radar) {
-//        animateRadarShowUp(); // TODO: Uncomment
+        if (shouldAnimateVisibility) {
+            animateRadarShowUp();
+        }
     }
 
     private void animateRadarShowUp() {
@@ -86,7 +106,9 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                radarShowTransition.play();
+                if (shouldAnimateVisibility) {
+                    radarShowTransition.play();
+                }
             }
         }, 200);
     }

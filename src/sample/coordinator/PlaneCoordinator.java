@@ -52,6 +52,7 @@ public class PlaneCoordinator {
     public static void interceptPlane(Plane target, Radar radar) {
         if (!trackedPlanes.contains(target)) {
             trackedPlanes.add(target);
+            getController().getPlaneView(target).setBeingTracked(true);
             addPlane(PlaneFactory.generateInterceptor(target, radar));
         }
     }

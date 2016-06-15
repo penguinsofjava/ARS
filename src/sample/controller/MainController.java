@@ -89,6 +89,16 @@ public class MainController implements Initializable {
         return result;
     }
 
+    public PlaneView getPlaneView(Plane plane) {
+        PlaneView found = null;
+        for (PlaneView pv : getPlaneViews()) {
+            if (pv.getPlane() == plane) {
+                found = pv;
+            }
+        }
+        return found;
+    }
+
     public void indicateTakedown(Position position) {
         final ImageView imageView = new ImageView("resources/image/cross.png");
         imageView.setX(position.getX() - imageView.getFitWidth() / 2);
