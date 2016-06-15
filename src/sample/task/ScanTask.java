@@ -5,6 +5,7 @@ import sample.logic.RadarMath;
 import sample.model.Plane;
 import sample.model.Radar;
 
+import java.util.ConcurrentModificationException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,24 +30,26 @@ public class ScanTask extends TimerTask {
 
     @Override
     public void run() {
-//        System.out.println("Scan iteration at radar with position (" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ")");
+        try {
+            for (Plane plane : PlaneCoordinator.getPlanes()) {
+                if (RadarMath.isPlaneInTheRadar(plane, radar)) {
+                    /* Notify plane so that it performs the necessary visual feedback */
+                    if (plane.getListener() != null) {
+                        plane.getListener().onCaughtOnRadar(radar);
+                    }
 
-        for (Plane plane : PlaneCoordinator.getPlanes()) {
-            if (RadarMath.isPlaneInTheRadar(plane, radar)) {
-                /* Notify plane so that it performs the necessary visual feedback */
-                if (plane.getListener() != null) {
-                    plane.getListener().onCaughtOnRadar(radar);
+                    if (plane.getType() == Plane.Type.HOSTILE) {
+                        PlaneCoordinator.interceptPlane(plane, radar);
+                    }
+
+                    getController().logMessage(
+                            "Radar@(" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ") detected "
+                                    + plane.getType().toString() + " plane at (" + plane.getPosition().getX() + ", " + plane.getPosition().getY() + ")"
+                    );
                 }
-
-//                if (plane.getType() == Plane.Type.HOSTILE) {
-                    PlaneCoordinator.interceptPlane(plane, radar);
-//                }
-
-                getController().logMessage(
-                        "Radar@(" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ") detected "
-                                + plane.getType().toString() + " plane at (" + plane.getPosition().getX() + ", " + plane.getPosition().getY() + ")"
-                );
             }
+        } catch (ConcurrentModificationException e) {
+            e.printStackTrace();
         }
     }
 }

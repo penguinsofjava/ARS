@@ -2,8 +2,6 @@ package sample.coordinator;
 
 import sample.model.Plane;
 import sample.model.Radar;
-import sample.view.InterceptorPlaneView;
-import sample.view.PlaneView;
 
 import java.util.ArrayList;
 
@@ -14,6 +12,8 @@ public class PlaneCoordinator {
 
     private static ArrayList<OnPlaneAddedListener> addListeners = new ArrayList<>();
     private static ArrayList<OnPlaneRemovedListener> removeListeners = new ArrayList<>();
+
+    private static ArrayList<Plane> trackedPlanes = new ArrayList<>();
 
     public static ArrayList<OnPlaneAddedListener> getAddListeners() {
         return addListeners;
@@ -50,8 +50,17 @@ public class PlaneCoordinator {
     }
 
     public static void interceptPlane(Plane target, Radar radar) {
-        InterceptorPlaneView interceptor = new InterceptorPlaneView(PlaneFactory.generateInterceptor(target), target, radar);
-        interceptor.startFlying();
+        if (!trackedPlanes.contains(target)) {
+            trackedPlanes.add(target);
+            addPlane(PlaneFactory.generateInterceptor(target, radar));
+        }
+    }
+
+    public static void notifyPlaneTakenDown(Plane plane) {
+        if (trackedPlanes.contains(plane)) {
+            trackedPlanes.remove(plane);
+        }
+        getController().indicateTakedown(plane.getPosition());
     }
 
     public interface OnPlaneAddedListener {

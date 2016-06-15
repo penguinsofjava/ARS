@@ -3,22 +3,25 @@ package sample.controller;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import sample.model.Plane;
+import sample.model.Position;
 import sample.model.Radar;
 import sample.ui.cell.RadarListCell;
 import sample.view.PlaneView;
 import sample.view.RadarView;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+
+import static sample.util.Log.log;
 
 public class MainController implements Initializable {
     public Pane map;
@@ -86,6 +89,29 @@ public class MainController implements Initializable {
         return result;
     }
 
+    public void indicateTakedown(Position position) {
+        final ImageView imageView = new ImageView("resources/image/cross.png");
+        imageView.setX(position.getX() - imageView.getFitWidth() / 2);
+        imageView.setY(position.getY() - imageView.getFitHeight() / 2);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                map.getChildren().add(imageView);
+            }
+        });
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        map.getChildren().remove(imageView);
+                    }
+                });
+            }
+        }, 4000);
+    }
+
     public int getMapWidth() {
         return (int) map.getWidth();
     }
@@ -99,6 +125,7 @@ public class MainController implements Initializable {
             @Override
             public void run() {
                 logMessages.add(message);
+                logList.scrollTo(logMessages.indexOf(message));
             }
         });
     }
@@ -107,15 +134,24 @@ public class MainController implements Initializable {
      * Needs testing
      */
     public void removePlane(Plane plane) {
-        for (final Node child : map.getChildren()) {
-            if (child instanceof PlaneView && ((PlaneView) child).getPlane() == plane) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        map.getChildren().remove(child);
-                    }
-                });
+        try {
+            for (final Node child : map.getChildren()) {
+                if (child instanceof PlaneView && ((PlaneView) child).getPlane() == plane) {
+                    ((PlaneView) child).stopFlying();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            map.getChildren().remove(child);
+                        }
+                    });
+                    break;
+                }
             }
+        } catch (ConcurrentModificationException e) {
+            e.printStackTrace();
+            // Simply try again
+            log("Failed when removing plane (ConcurrentModificationException). Trying again...");
+            removePlane(plane);
         }
     }
 }

@@ -2,56 +2,43 @@ package sample.task;
 
 import sample.coordinator.PlaneCoordinator;
 import sample.model.Plane;
-import sample.model.Radar;
-import sample.view.InterceptorPlaneView;
+import sample.view.PlaneView;
 
 import java.util.TimerTask;
 
 public class InterceptorTrackTask extends TimerTask {
     private Plane target;
-    private InterceptorPlaneView interceptor;
+    private PlaneView interceptor;
 
-    public static InterceptorTrackTask with(Plane plane, InterceptorPlaneView interceptor) {
+    public static InterceptorTrackTask with(Plane plane, PlaneView interceptor) {
         return new InterceptorTrackTask(plane, interceptor);
     }
 
-    private InterceptorTrackTask(Plane target, InterceptorPlaneView interceptor) {
+    private InterceptorTrackTask(Plane target, PlaneView interceptor) {
         this.target = target;
         this.interceptor = interceptor;
     }
 
     private void trackWithInterceptor() {
-        int distance = calculateDistance();
-
-        System.out.println("Distance " + distance);
-        if (distance > 10) {
-            System.out.println("Boo!");
-            if (interceptor.getPosition().getX() < target.getPosition().getX()) {
-                interceptor.setX(target.getPosition().getX() + interceptor.getPlane().getSpeed());
-            } else {
-                interceptor.setX(target.getPosition().getX() - interceptor.getPlane().getSpeed());
-            }
-
-            if (interceptor.getPosition().getY() < target.getPosition().getY()) {
-                interceptor.setY(target.getPosition().getY() + interceptor.getPlane().getSpeed());
-            } else {
-                interceptor.setY(target.getPosition().getY() - interceptor.getPlane().getSpeed());
-            }
+        if (calculateDistance() > 10) {
+            int interceptorX = interceptor.getPosition().getX();
+            int interceptorY = interceptor.getPosition().getY();
+            int speed = interceptor.getPlane().getSpeed();
+            interceptor.setX(interceptorX < target.getPosition().getX() ? interceptorX + speed : interceptorX - speed);
+            interceptor.setY(interceptorY < target.getPosition().getY() ? interceptorY + speed : interceptorY - speed);
         } else {
-            // TODO: Stop
+            PlaneCoordinator.notifyPlaneTakenDown(target);
             PlaneCoordinator.removePlane(target);
-            System.out.println("Boom!");
-            this.cancel();
+            PlaneCoordinator.removePlane(interceptor.getPlane());
         }
     }
 
     private int calculateDistance() {
-        return (int) Math.sqrt(
-                (interceptor.getPosition().getX() - target.getPosition().getX())
-                        * (interceptor.getPosition().getX() - target.getPosition().getX())
-                        + (interceptor.getPosition().getY() - target.getPosition().getY())
-                        * (interceptor.getPosition().getY() - target.getPosition().getY())
-        );
+        int interceptorX = interceptor.getPosition().getX();
+        int interceptorY = interceptor.getPosition().getY();
+        int targetX = target.getPosition().getX();
+        int targetY = target.getPosition().getY();
+        return (int) Math.sqrt(Math.pow(interceptorX - targetX, 2) + Math.pow(interceptorY - targetY, 2));
     }
 
     @Override

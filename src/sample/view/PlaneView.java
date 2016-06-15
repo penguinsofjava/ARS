@@ -5,15 +5,12 @@ import javafx.animation.Interpolator;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import sample.Main;
 import sample.coordinator.PlaneCoordinator;
-import sample.model.Plane;
-import sample.model.Position;
-import sample.model.Positionable;
-import sample.model.Radar;
+import sample.model.*;
 import sample.task.FlyTask;
+import sample.task.InterceptorTrackTask;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,7 +21,7 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
     private Plane plane;
 
-   protected Timer flyTimer;
+    private Timer flyTimer;
 
     private FadeTransition radarShowTransition;
 
@@ -42,7 +39,11 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
         plane.setListener(this);
 
+        if (plane instanceof InterceptorPlane) {
+            setPosition(((InterceptorPlane) plane).getAirbase().getPosition());
+        } else {
 //        setOpacity(0); // TODO: Uncomment
+        }
 
         draw();
     }
@@ -55,7 +56,11 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
         if (flyTimer == null) {
             flyTimer = new Timer();
         }
-        flyTimer.schedule(FlyTask.with(this), 0, 100);
+        if (plane instanceof InterceptorPlane) {
+            flyTimer.schedule(InterceptorTrackTask.with(((InterceptorPlane) plane).getTarget(), this), 0, 100);
+        } else {
+            flyTimer.schedule(FlyTask.with(this), 0, 100);
+        }
     }
 
     public void stopFlying() {
@@ -88,8 +93,8 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
     @Override
     public void setPosition(Position position) {
-    	setX(position.getX());
-    	setY(position.getY());
+        setX(position.getX());
+        setY(position.getY());
     }
 
     @Override
@@ -99,23 +104,23 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
 
     @Override
     public void moveInX(int by) {
-    	setX((int) getLayoutX() + by);
+        setX((int) getLayoutX() + by);
     }
 
     @Override
     public void moveInY(int by) {
-    	setY((int) getLayoutY() + by);
+        setY((int) getLayoutY() + by);
     }
 
     public void setX(int x) {
-    	setLayoutX(x);
-    	plane.getPosition().setX(x);
+        setLayoutX(x);
+        plane.getPosition().setX(x);
         notifyPositionChanged();
     }
 
     public void setY(int y) {
-    	setLayoutY(y);
-    	plane.getPosition().setY(y);
+        setLayoutY(y);
+        plane.getPosition().setY(y);
         notifyPositionChanged();
     }
 

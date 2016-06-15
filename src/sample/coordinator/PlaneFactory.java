@@ -1,8 +1,9 @@
 package sample.coordinator;
 
 import sample.Main;
+import sample.model.InterceptorPlane;
 import sample.model.Plane;
-import sample.model.Position;
+import sample.model.Radar;
 import sample.util.StaticRandom;
 
 import java.util.Timer;
@@ -69,13 +70,13 @@ public class PlaneFactory {
         return new Plane(model, speed, type, pathType, yAnchor, pathExtensionConstant);
     }
 
-    public static Plane generateInterceptor(Plane target) {
+    public static InterceptorPlane generateInterceptor(Plane target, Radar radar) {
         /* Speed */
         int speed = target.getSpeed() + 1;
 
         /* Type */
         Plane.Type type = Plane.Type.INTERCEPTOR;
 
-        return new Plane(Plane.MODELS[0], speed, type, 0, 0, 0);
+        return new InterceptorPlane(speed, target, radar);
     }
 }
