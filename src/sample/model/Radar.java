@@ -2,6 +2,7 @@ package sample.model;
 
 public class Radar {
     private int id;
+    private String name;
     private int scanAngle = 40; // default (degrees)
     private int radius = 50; // default (pixels)
     private int scanInterval = 1000; // default (milliseconds)
@@ -14,8 +15,9 @@ public class Radar {
         /* Empty - Not sure if we'll ever need this... Keeping it for now... */
     }
 
-    public Radar(int id, Integer scanAngle, Integer radius, Integer scanInterval, Position position) {
+    public Radar(int id, String name, Integer scanAngle, Integer radius, Integer scanInterval, Position position) {
         this.id = id;
+        this.name = name;
         if (scanAngle != null) this.scanAngle = scanAngle;
         if (radius != null) this.radius = radius;
         if (scanInterval != null) this.scanInterval = scanInterval;
@@ -28,6 +30,14 @@ public class Radar {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getScanAngle() {

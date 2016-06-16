@@ -43,7 +43,7 @@ public class ScanTask extends TimerTask {
                     }
 
                     getController().logMessage(
-                            "Radar@(" + radar.getPosition().getX() + ", " + radar.getPosition().getY() + ") detected "
+                            "Radar \"" + radar.getName() + "\" detected "
                                     + plane.getType().toString() + " plane at (" + plane.getPosition().getX() + ", " + plane.getPosition().getY() + ")"
                     );
                 }

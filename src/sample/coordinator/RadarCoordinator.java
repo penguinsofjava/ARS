@@ -35,6 +35,7 @@ public class RadarCoordinator {
             while (input.hasNext()) {
                 Radar radar = new Radar();
                 radar.setId(input.nextInt());
+                radar.setName(input.next());
                 radar.setScanAngle(input.nextInt());
                 radar.setRadius(input.nextInt());
                 radar.setScanInterval(input.nextInt());
