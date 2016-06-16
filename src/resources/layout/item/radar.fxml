@@ -17,7 +17,7 @@
             <HBox.margin>
                 <Insets left="8.0" right="8.0" />
             </HBox.margin></ImageView>
-        <Label fx:id="position" minWidth="70.0" text="(00X, 00Y)" />
+        <Label fx:id="name" minWidth="70.0" text="(00X, 00Y)" />
         <Region prefHeight="56.0" prefWidth="200.0" />
         <Button fx:id="startStop" alignment="CENTER_RIGHT" contentDisplay="TOP" minWidth="60.0" mnemonicParsing="false" text="Button" underline="true">
             <HBox.margin>

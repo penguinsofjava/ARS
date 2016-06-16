@@ -33,7 +33,7 @@ public class RadarListCell extends ListCell<Radar> {
 
             root.setPrefHeight(76);
 
-            controller.setPosition(item.getPosition());
+            controller.setName(item.getName());
             controller.setOnStartStopAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {

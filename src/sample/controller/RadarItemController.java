@@ -6,14 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import sample.model.Position;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RadarItemController implements Initializable {
     @FXML
-    private Label position;
+    private Label name;
     @FXML
     private Button startStop;
 
@@ -22,8 +21,8 @@ public class RadarItemController implements Initializable {
         startStop.setVisible(false);
     }
 
-    public void setPosition(Position position) {
-        this.position.setText("(" + position.getX() + ", " + position.getY() + ")");
+    public void setName(String name) {
+        this.name.setText(name);
     }
 
     public void setStartStopButtonText(String text) {
