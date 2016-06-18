@@ -31,7 +31,7 @@ public class ThreatItemController {
     }
 
     public void missileButtonClicked() {
-        // TODO: Missile takedown
+        PlaneCoordinator.shootdownPlane(threat.getRadar(), threat.getTarget());
         interceptButtonsContainer.setVisible(false);
     }
 }

@@ -5,6 +5,7 @@ import tr.gediz.ars.bus.Bus;
 import tr.gediz.ars.bus.event.PlaneAddedEvent;
 import tr.gediz.ars.bus.event.PlaneInterceptedEvent;
 import tr.gediz.ars.bus.event.PlaneRemovedEvent;
+import tr.gediz.ars.bus.event.PlaneShotEvent;
 import tr.gediz.ars.model.Plane;
 import tr.gediz.ars.model.Radar;
 import tr.gediz.ars.model.Threat;
@@ -46,11 +47,16 @@ public class PlaneCoordinator {
         }
     }
 
-    @Subscribe
-    public void onInterceptionByPlane(PlaneInterceptedEvent event) {
-        if (trackedPlanes.contains(event.getTarget())) {
-            trackedPlanes.remove(event.getTarget());
+    public static void shootdownPlane(Radar radar, Plane target) {
+        if (!trackedPlanes.contains(target)) {
+            trackedPlanes.add(target);
+            getController().drawMissile(radar, target);
         }
+    }
+
+    @Subscribe
+    public void onPlaneIntercepted(PlaneInterceptedEvent event) {
+        trackedPlanes.remove(event.getTarget());
         PlaneCoordinator.removePlane(event.getTarget());
         getController().indicateTakedown(event.getTarget().getPosition());
         getController().removeThreat(new Threat(event.getRadar(), event.getTarget()));

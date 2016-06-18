@@ -38,8 +38,12 @@ public class ThreatListCell extends ListCell<Threat> {
     }
 
     private void setEmptyGraphic() {
-        Pane pane = new Pane();
-        pane.setPrefHeight(0);
-        setGraphic(pane);
+        try {
+            Pane pane = new Pane();
+            pane.setPrefHeight(0);
+            setGraphic(pane);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
     }
 }
