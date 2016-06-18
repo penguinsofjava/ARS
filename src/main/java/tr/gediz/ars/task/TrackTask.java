@@ -1,55 +1,56 @@
 package tr.gediz.ars.task;
 
-import tr.gediz.ars.model.Missile;
-import tr.gediz.ars.model.Plane;
-import tr.gediz.ars.model.Radar;
-import tr.gediz.ars.model.Position;
+import tr.gediz.ars.bus.Bus;
+import tr.gediz.ars.bus.event.PlaneInterceptedEvent;
+import tr.gediz.ars.model.*;
+import tr.gediz.ars.view.MissileView;
 
 import java.util.TimerTask;
 
-public class TrackTask extends TimerTask{
+import static tr.gediz.ars.Main.getController;
 
+public class TrackTask extends TimerTask {
     private Radar radar;
-    private Plane plane;
+    private Plane target;
+    private MissileView self;
 
-    public TrackTask(Radar radar, Plane plane) {
+    private TrackTask(Radar radar, Plane target, MissileView self) {
         this.radar = radar;
-        this.plane = plane;
+        this.target = target;
+        this.self = self;
     }
 
-    private void trackPlaneWithMissile(Plane plane, Radar radar){
-        Missile missile = new Missile(plane.getSpeed()*10,new Position(radar.getPosition().getX(),radar.getPosition().getY()));
-        int distance;
-        do{
-            distance=calculateDistance(missile,plane);
-            if(missile.getPosition().getX() < plane.getPosition().getX()){
-                missile.getPosition().setX(missile.getPosition().getX()+missile.getSpeed());
-            }else{
-                missile.getPosition().setX(missile.getPosition().getX()-missile.getSpeed());
-            }
+    public static TrackTask with(Radar radar, Plane target, MissileView self) {
+        return new TrackTask(radar, target, self);
+    }
 
-            if(missile.getPosition().getY()<plane.getPosition().getY()){
-                missile.getPosition().setY(missile.getPosition().getY()+missile.getSpeed());
-            }else{
-                missile.getPosition().setY(missile.getPosition().getY()-missile.getSpeed());
-            }
-        }while(distance > 50);
-
-        if(distance < 50 ){
-            missile.getPosition().setX(plane.getPosition().getX());
-            missile.getPosition().setY(plane.getPosition().getY());
+    private void trackPlaneWithMissile(Plane plane, Radar radar) {
+        if (calculateDistance() > 10) {
+            int missileX = self.getPosition().getX();
+            int missileY = self.getPosition().getY();
+            int speed = MissileView.SPEED;
+            self.setX(missileX < target.getPosition().getX() ? missileX + speed : missileX - speed);
+            self.setY(missileY < target.getPosition().getY() ? missileY + speed : missileY - speed);
+        } else {
+            self.setX(plane.getPosition().getX());
+            self.setY(plane.getPosition().getY());
+            Bus.get().post(new PlaneInterceptedEvent(radar, target));
+            getController().removeMissile(self);
+            cancel();
         }
-
-
     }
 
-    private int calculateDistance(Missile missile,Plane plane){
-        int distance = (int) Math.sqrt((missile.getPosition().getX()-plane.getPosition().getX())*(missile.getPosition().getX()-plane.getPosition().getX())+missile.getPosition().getY()-plane.getPosition().getY()*missile.getPosition().getY()-plane.getPosition().getY());
-        return distance;
+    @SuppressWarnings("Duplicates")
+    private int calculateDistance() {
+        int missileX = self.getPosition().getX();
+        int missileY = self.getPosition().getY();
+        int targetX = target.getPosition().getX();
+        int targetY = target.getPosition().getY();
+        return (int) Math.sqrt(Math.pow(missileX - targetX, 2) + Math.pow(missileY - targetY, 2));
     }
 
     @Override
     public void run() {
-        trackPlaneWithMissile(plane, radar);
+        trackPlaneWithMissile(target, radar);
     }
 }

@@ -33,13 +33,7 @@ public class InterceptorTrackTask extends TimerTask {
                 interceptor.setX(interceptorX < target.getPosition().getX() ? interceptorX + speed : interceptorX - speed);
                 interceptor.setY(interceptorY < target.getPosition().getY() ? interceptorY + speed : interceptorY - speed);
             } else {
-                Bus.get().post(
-                        new PlaneInterceptedEvent(
-                                ((InterceptorPlane) interceptor.getPlane()).getAirbase(),
-                                interceptor.getPlane(),
-                                target
-                        )
-                );
+                Bus.get().post(new PlaneInterceptedEvent(((InterceptorPlane) interceptor.getPlane()).getAirbase(), target));
                 track = false;
             }
         } else {
@@ -71,6 +65,7 @@ public class InterceptorTrackTask extends TimerTask {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     private int calculateDistance() {
         int interceptorX = interceptor.getPosition().getX();
         int interceptorY = interceptor.getPosition().getY();

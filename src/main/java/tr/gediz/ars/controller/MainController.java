@@ -19,6 +19,7 @@ import tr.gediz.ars.bus.Bus;
 import tr.gediz.ars.bus.event.PlaneAddedEvent;
 import tr.gediz.ars.bus.event.PlaneRemovedEvent;
 import tr.gediz.ars.util.Log;
+import tr.gediz.ars.view.MissileView;
 import tr.gediz.ars.view.PlaneView;
 import tr.gediz.ars.model.Plane;
 import tr.gediz.ars.model.Position;
@@ -123,6 +124,21 @@ public class MainController implements Initializable {
         });
     }
 
+    public void drawMissile(Radar radar, Plane target) {
+        MissileView missileView = new MissileView(radar, target);
+        map.getChildren().add(missileView);
+        missileView.fire();
+    }
+
+    public void removeMissile(final MissileView missileView) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                map.getChildren().remove(missileView);
+            }
+        });
+    }
+
     public ArrayList<RadarView> getRadarViews() {
         ArrayList<RadarView> result = new ArrayList<>();
         for (Node child : map.getChildren()) {
@@ -205,8 +221,13 @@ public class MainController implements Initializable {
         });
     }
 
-    public void removeThreat(Threat threat) {
-        threats.remove(threat);
+    public void removeThreat(final Threat threat) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                threats.remove(threat);
+            }
+        });
     }
 
     public void logMessage(final String message) {

@@ -3,11 +3,11 @@ package tr.gediz.ars.bus.event;
 import tr.gediz.ars.model.Plane;
 import tr.gediz.ars.model.Radar;
 
-public class PlaneInterceptedEvent {
+public class PlaneShotEvent {
     private Radar radar;
     private Plane target;
 
-    public PlaneInterceptedEvent(Radar radar, Plane target) {
+    public PlaneShotEvent(Radar radar, Plane target) {
         this.radar = radar;
         this.target = target;
     }
