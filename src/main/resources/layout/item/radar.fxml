@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="180.0" spacing="8.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.gediz.ars.controller.RadarItemController">
+    <children>
+        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../image/icon/radar.png" />
+            </image>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin></ImageView>
+        <Label fx:id="name" minWidth="70.0" text="(00X, 00Y)" />
+        <Region HBox.hgrow="ALWAYS" />
+        <ImageView fx:id="startStop" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#toggleRadar" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../image/icon/toggle_switch_on.png" />
+            </image>
+        </ImageView>
+    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>
