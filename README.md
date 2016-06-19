@@ -1,2 +1,4 @@
 # ARS
-Air Radar Simulator – University programming semester project.
+Air Radar Simulator – University semester project.
+
+###### [JavaDoc](https://ars.xiprox.me/docs)
