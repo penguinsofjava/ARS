@@ -2,12 +2,11 @@ package tr.gediz.ars.task;
 
 import tr.gediz.ars.bus.Bus;
 import tr.gediz.ars.bus.event.PlaneInterceptedEvent;
+import tr.gediz.ars.controller.MainController;
 import tr.gediz.ars.model.*;
 import tr.gediz.ars.view.MissileView;
 
 import java.util.TimerTask;
-
-import static tr.gediz.ars.Main.getController;
 
 public class TrackTask extends TimerTask {
     private Radar radar;
@@ -35,7 +34,7 @@ public class TrackTask extends TimerTask {
             self.setX(plane.getPosition().getX());
             self.setY(plane.getPosition().getY());
             Bus.get().post(new PlaneInterceptedEvent(radar, target));
-            getController().removeMissile(self);
+            MainController.getInstance().removeMissile(self);
             cancel();
         }
     }

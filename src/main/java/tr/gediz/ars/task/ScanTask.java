@@ -1,5 +1,6 @@
 package tr.gediz.ars.task;
 
+import tr.gediz.ars.controller.MainController;
 import tr.gediz.ars.logic.RadarMath;
 import tr.gediz.ars.coordinator.PlaneCoordinator;
 import tr.gediz.ars.model.Plane;
@@ -10,8 +11,6 @@ import tr.gediz.ars.view.PlaneView;
 import java.util.ConcurrentModificationException;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static tr.gediz.ars.Main.getController;
 
 /**
  * A {@link TimerTask} that performs a task for {@link Plane}s on the "map" to see whether they are friendly or hostile
@@ -41,12 +40,12 @@ public class ScanTask extends TimerTask {
                     }
 
                     if (plane.getType() == Plane.Type.HOSTILE) {
-                        PlaneView planeView = getController().getPlaneView(plane);
+                        PlaneView planeView = MainController.getInstance().getPlaneView(plane);
                         planeView.setBeingTracked(true);
-                        getController().addThreat(new Threat(radar, plane));
+                        MainController.getInstance().addThreat(new Threat(radar, plane));
                     }
 
-                    getController().logMessage(
+                    MainController.getInstance().logMessage(
                             "Radar \"" + radar.getName() + "\" detected "
                                     + plane.getType().toString() + " plane at (" + plane.getPosition().getX() + ", " + plane.getPosition().getY() + ")"
                     );

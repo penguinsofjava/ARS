@@ -4,13 +4,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import tr.gediz.ars.Main;
+import tr.gediz.ars.controller.MainController;
 import tr.gediz.ars.model.*;
 import tr.gediz.ars.task.TrackTask;
 
 import java.util.Timer;
-
-import static tr.gediz.ars.Main.getController;
 
 public class MissileView extends Pane implements Positionable {
     public static final int SPEED = 6;
@@ -82,11 +80,11 @@ public class MissileView extends Pane implements Positionable {
     }
 
     private void notifyPositionChanged() {
-        if (getLayoutY() >= getController().getMapHeight() - getHeight()
-                || getLayoutX() >= getController().getMapWidth() - getWidth()) {
+        if (getLayoutY() >= MainController.getInstance().getMapHeight() - getHeight()
+                || getLayoutX() >= MainController.getInstance().getMapWidth() - getWidth()) {
             System.out.println("Missile out of map. Removing...");
             flyTimer.cancel();
-            getController().removeMissile(this);
+            MainController.getInstance().removeMissile(this);
         }
     }
 
