@@ -87,7 +87,7 @@ public class LoginController {
 
             PlaneFactory.start();
 
-            stage.close();
+            this.stage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
