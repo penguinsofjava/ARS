@@ -1,6 +1,7 @@
 package tr.gediz.ars.coordinator;
 
 import tr.gediz.ars.Main;
+import tr.gediz.ars.controller.MainController;
 import tr.gediz.ars.model.InterceptorPlane;
 import tr.gediz.ars.model.Plane;
 import tr.gediz.ars.model.Radar;
@@ -65,7 +66,7 @@ public class PlaneFactory {
         }
 
         /* Random y anchor */
-        int yAnchor = StaticRandom.get().nextInt(Main.getController().getMapHeight() + 1);
+        int yAnchor = StaticRandom.get().nextInt(MainController.getInstance().getMapHeight() + 1);
 
         return new Plane(model, speed, type, pathType, yAnchor, pathExtensionConstant);
     }

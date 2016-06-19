@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
+import tr.gediz.ars.Main;
 import tr.gediz.ars.bus.Bus;
 import tr.gediz.ars.bus.event.PlaneAddedEvent;
 import tr.gediz.ars.bus.event.PlaneRemovedEvent;
@@ -35,6 +36,8 @@ import java.util.*;
 import static tr.gediz.ars.util.Log.log;
 
 public class MainController implements Initializable {
+    private static MainController instance;
+
     public Pane map;
     public ListView<String> logList;
     public ListView<Radar> radarsList;
@@ -53,6 +56,14 @@ public class MainController implements Initializable {
                 Log.log(observable.toString());
             }
         });
+    }
+
+    public static MainController getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(MainController instance) {
+        MainController.instance = instance;
     }
 
     @Override

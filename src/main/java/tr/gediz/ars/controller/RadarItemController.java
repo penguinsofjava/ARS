@@ -7,8 +7,6 @@ import javafx.scene.image.ImageView;
 import tr.gediz.ars.model.Radar;
 import tr.gediz.ars.view.RadarView;
 
-import static tr.gediz.ars.Main.getController;
-
 public class RadarItemController {
     @FXML
     private Label name;
@@ -18,7 +16,7 @@ public class RadarItemController {
     private RadarView radar;
 
     public void setRadar(Radar radar) {
-        this.radar = getController().getRadarView(radar);
+        this.radar = MainController.getInstance().getRadarView(radar);
     }
 
     public void setName(String name) {

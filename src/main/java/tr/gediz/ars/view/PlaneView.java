@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import tr.gediz.ars.Main;
+import tr.gediz.ars.controller.MainController;
 import tr.gediz.ars.coordinator.PlaneCoordinator;
 import tr.gediz.ars.model.*;
 import tr.gediz.ars.task.FlyTask;
@@ -149,8 +150,8 @@ public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRad
     }
 
     private void notifyPositionChanged() {
-        if (getLayoutY() >= Main.getController().getMapHeight() - getHeight()
-                || getLayoutX() >= Main.getController().getMapWidth() - getWidth()) {
+        if (getLayoutY() >= MainController.getInstance().getMapHeight() - getHeight()
+                || getLayoutX() >= MainController.getInstance().getMapWidth() - getWidth()) {
             System.out.println("Plane out of map. Removing...");
             stopFlying();
             PlaneCoordinator.removePlane(plane);

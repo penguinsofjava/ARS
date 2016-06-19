@@ -5,14 +5,12 @@ import tr.gediz.ars.bus.Bus;
 import tr.gediz.ars.bus.event.PlaneAddedEvent;
 import tr.gediz.ars.bus.event.PlaneInterceptedEvent;
 import tr.gediz.ars.bus.event.PlaneRemovedEvent;
-import tr.gediz.ars.bus.event.PlaneShotEvent;
+import tr.gediz.ars.controller.MainController;
 import tr.gediz.ars.model.Plane;
 import tr.gediz.ars.model.Radar;
 import tr.gediz.ars.model.Threat;
 
 import java.util.ArrayList;
-
-import static tr.gediz.ars.Main.getController;
 
 public class PlaneCoordinator {
     private static ArrayList<Plane> planes = new ArrayList<>();
@@ -50,7 +48,7 @@ public class PlaneCoordinator {
     public static void shootdownPlane(Radar radar, Plane target) {
         if (!trackedPlanes.contains(target)) {
             trackedPlanes.add(target);
-            getController().drawMissile(radar, target);
+            MainController.getInstance().drawMissile(radar, target);
         }
     }
 
@@ -58,7 +56,7 @@ public class PlaneCoordinator {
     public void onPlaneIntercepted(PlaneInterceptedEvent event) {
         trackedPlanes.remove(event.getTarget());
         PlaneCoordinator.removePlane(event.getTarget());
-        getController().indicateTakedown(event.getTarget().getPosition());
-        getController().removeThreat(new Threat(event.getRadar(), event.getTarget()));
+        MainController.getInstance().indicateTakedown(event.getTarget().getPosition());
+        MainController.getInstance().removeThreat(new Threat(event.getRadar(), event.getTarget()));
     }
 }
