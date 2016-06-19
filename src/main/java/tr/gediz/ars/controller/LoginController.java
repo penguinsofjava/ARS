@@ -57,25 +57,7 @@ public class LoginController {
                 System.out.println("**");
                 if (pw1.getText().equals(users.get(x).getPw())) {
                     pwCheck = 1;
-
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/main.fxml"));
-                        Parent root = (Parent) loader.load();
-                        MainController.setInstance((MainController) loader.getController());
-                        Stage stage = new Stage();
-                        stage.setTitle("Radar HQ");
-                        stage.setScene(new Scene(root, 1471, 680));
-                        stage.show();
-
-                        RadarCoordinator.loadRadars();
-                        MainController.getInstance().drawRadars(RadarCoordinator.getRadars());
-
-                        PlaneFactory.start();
-
-                        stage.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    showMainStage();
                 }
             }
         }
@@ -88,6 +70,27 @@ public class LoginController {
 
         System.out.println(id.getText());
         System.out.println(pw1.getText());
+    }
+
+    public void showMainStage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/main.fxml"));
+            Parent root = (Parent) loader.load();
+            MainController.setInstance((MainController) loader.getController());
+            Stage stage = new Stage();
+            stage.setTitle("Radar HQ");
+            stage.setScene(new Scene(root, 1471, 680));
+            stage.show();
+
+            RadarCoordinator.loadRadars();
+            MainController.getInstance().drawRadars(RadarCoordinator.getRadars());
+
+            PlaneFactory.start();
+
+            stage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setStage(Stage stage) {
