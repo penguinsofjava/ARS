@@ -17,7 +17,8 @@ public class Main extends Application {
         controller.setStage(primaryStage);
         primaryStage.setTitle("Air Radar Simulator");
         primaryStage.setScene(new Scene(root, 425, 250));
-        primaryStage.show();
+      //  primaryStage.show();
+        controller.showMainStage();
     }
 
     @Override

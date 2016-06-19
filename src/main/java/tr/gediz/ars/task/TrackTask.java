@@ -30,8 +30,11 @@ public class TrackTask extends TimerTask {
             int speed = MissileView.SPEED;
             if(Math.abs(missileY - target.getPosition().getY()) < 5){
                 missileY = target.getPosition().getY();
-                self.setX(missileY);
+                self.setY(missileY);
                 self.setX(missileX < target.getPosition().getX() ? missileX + speed : missileX - speed);
+            }else if(Math.abs(missileX - target.getPosition().getX()) < 5){
+                self.setX(target.getPosition().getX());
+                self.setY(missileY < target.getPosition().getY() ? missileY + speed : missileY - speed);
             }else{
                 self.setX(missileX < target.getPosition().getX() ? missileX + speed : missileX - speed);
                 self.setY(missileY < target.getPosition().getY() ? missileY + speed : missileY - speed);

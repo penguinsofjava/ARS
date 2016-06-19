@@ -33,6 +33,13 @@ public class InterceptorTrackTask extends TimerTask {
                 if(Math.abs(interceptorY - target.getPosition().getY()) < 5){
                     interceptor.setY(interceptorY);
                     interceptor.setX(interceptorX < target.getPosition().getX() ? interceptorX + speed : interceptorX - speed);
+                }else if(Math.abs(interceptorX - target.getPosition().getX()) < 5){
+                    interceptor.setX(interceptorX);
+                    if(interceptorY > target.getPosition().getY()){
+                        interceptor.setY(interceptorY - speed);
+                    }else{
+                        interceptor.setY(interceptorY + speed);
+                    }
                 }else{
                     interceptor.setX(interceptorX < target.getPosition().getX() ? interceptorX + speed : interceptorX - speed);
                     interceptor.setY(interceptorY < target.getPosition().getY() ? interceptorY + speed : interceptorY - speed);
@@ -61,6 +68,13 @@ public class InterceptorTrackTask extends TimerTask {
                     interceptor.setX(interceptorX - speed);
                 } else {
                     interceptor.setX(interceptorX + speed);
+                }
+            }else if(Math.abs(interceptorX - baseX) < 5){
+                interceptor.setX(interceptorX);
+                if(interceptorY > baseY){
+                    interceptor.setY(interceptorY - speed);
+                }else{
+                    interceptor.setY(interceptorY + speed);
                 }
             }else{
                 if (interceptorX > baseX) {
