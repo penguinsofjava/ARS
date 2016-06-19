@@ -30,8 +30,14 @@ public class InterceptorTrackTask extends TimerTask {
                 int interceptorX = interceptor.getPosition().getX();
                 int interceptorY = interceptor.getPosition().getY();
                 int speed = interceptor.getPlane().getSpeed();
-                interceptor.setX(interceptorX < target.getPosition().getX() ? interceptorX + speed : interceptorX - speed);
-                interceptor.setY(interceptorY < target.getPosition().getY() ? interceptorY + speed : interceptorY - speed);
+                if(Math.abs(interceptorY - target.getPosition().getY()) < 5){
+                    interceptor.setY(interceptorY);
+                    interceptor.setX(interceptorX < target.getPosition().getX() ? interceptorX + speed : interceptorX - speed);
+                }else{
+                    interceptor.setX(interceptorX < target.getPosition().getX() ? interceptorX + speed : interceptorX - speed);
+                    interceptor.setY(interceptorY < target.getPosition().getY() ? interceptorY + speed : interceptorY - speed);
+                }
+
             } else {
                 Bus.get().post(new PlaneInterceptedEvent(((InterceptorPlane) interceptor.getPlane()).getAirbase(), target));
                 track = false;
@@ -49,17 +55,27 @@ public class InterceptorTrackTask extends TimerTask {
             int interceptorX = interceptor.getPosition().getX();
             int interceptorY = interceptor.getPosition().getY();
 
-            if (interceptorX > baseX) {
-                interceptor.setX(interceptorX - speed);
-            } else {
-                interceptor.setX(interceptorX + speed);
+            if(Math.abs(interceptorY - baseY) < 5){
+                interceptor.setY(interceptorY);
+                if (interceptorX > baseX) {
+                    interceptor.setX(interceptorX - speed);
+                } else {
+                    interceptor.setX(interceptorX + speed);
+                }
+            }else{
+                if (interceptorX > baseX) {
+                    interceptor.setX(interceptorX - speed);
+                } else {
+                    interceptor.setX(interceptorX + speed);
+                }
+
+                if (interceptorY > baseY) {
+                    interceptor.setY(interceptorY - speed);
+                } else {
+                    interceptor.setY(interceptorY + speed);
+                }
             }
 
-            if (interceptorY > baseY) {
-                interceptor.setY(interceptorY - speed);
-            } else {
-                interceptor.setY(interceptorY + speed);
-            }
         } else {
             PlaneCoordinator.removePlane(interceptor.getPlane());
         }
