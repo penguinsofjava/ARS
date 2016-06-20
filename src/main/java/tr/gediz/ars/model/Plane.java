@@ -120,7 +120,7 @@ public class Plane {
     }
 
     public enum Type {
-        FRIENDLY("friendly", "#00E676"), HOSTILE("hostile", "#FF1744"), UNKNOWN("unknown", "#455A64"), INTERCEPTOR("interceptor", "#455A64");
+        FRIENDLY("friendly", "#00E676"), HOSTILE("hostile", "#FF1744"), UNKNOWN("unknown", "#455A64"), INTERCEPTOR("interceptor", "#3F51B5");
 
         private String value;
         private Color indicatorColor;
