@@ -10,6 +10,10 @@ import tr.gediz.ars.task.TrackTask;
 
 import java.util.Timer;
 
+/**
+ * A subclass of {@link Pane} that we use to display missiles on screen. It's really just simple {@link Canvas} drawing of a
+ * circle.
+ */
 public class MissileView extends Pane implements Positionable {
     public static final int SPEED = 6;
 
@@ -41,6 +45,9 @@ public class MissileView extends Pane implements Positionable {
         return radar;
     }
 
+    /**
+     * Launch this missile so that it brings that target down.
+     */
     public void fire() {
         if (flyTimer == null) {
             flyTimer = new Timer();

@@ -8,9 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * A {@link TimerTask} that makes a {@link Plane} fly on the "map".
- *
- * Make sure to cancel the parent {@link Timer} once you are done with it!
+ * A {@link TimerTask} that makes a {@link Plane} fly on the map.
  */
 public class FlyTask extends TimerTask {
     private PlaneView planeView;

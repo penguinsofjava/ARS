@@ -8,6 +8,12 @@ import tr.gediz.ars.view.MissileView;
 
 import java.util.TimerTask;
 
+/**
+ * A {@link TimerTask} that makes a missile fly and shoot down a target {@link Plane}.
+ *
+ * Functionality is the same as {@link InterceptorTrackTask}. More or less the only difference is that here we don't
+ * fly back to an airbase but instead just disappaer.
+ */
 public class TrackTask extends TimerTask {
     private Radar radar;
     private Plane target;

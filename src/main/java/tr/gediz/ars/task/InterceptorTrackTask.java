@@ -1,5 +1,6 @@
 package tr.gediz.ars.task;
 
+import com.google.common.eventbus.EventBus;
 import tr.gediz.ars.bus.Bus;
 import tr.gediz.ars.bus.event.PlaneInterceptedEvent;
 import tr.gediz.ars.coordinator.PlaneCoordinator;
@@ -9,6 +10,14 @@ import tr.gediz.ars.view.PlaneView;
 
 import java.util.TimerTask;
 
+/**
+ * A {@link TimerTask} that intercepts a given target {@link Plane}.
+ *
+ * It moves closer to the target {@link Plane} until it reaches a certain threshold distance value. When the threshold
+ * value is reached, it posts a {@link PlaneInterceptedEvent} to the {@link EventBus}, which in turn causes the target
+ * {@link Plane} to be removed from the map and an x sign to be shown in its position. The intercepting plane itself
+ * flies back to its airbase ({@link InterceptorPlane#airbase}).
+ */
 public class InterceptorTrackTask extends TimerTask {
     private Plane target;
     private PlaneView interceptor;

@@ -16,6 +16,9 @@ import tr.gediz.ars.task.InterceptorTrackTask;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * A subclass of {@link Pane} that we use to display {@link Plane}s on screen.
+ */
 public class PlaneView extends Pane implements Positionable, Plane.OnCaughtOnRadarListener {
     private static final int WIDTH = 8; // px
     private static final int HEIGHT = 8; // px

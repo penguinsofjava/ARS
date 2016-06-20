@@ -1,9 +1,6 @@
 package tr.gediz.ars.controller;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,20 +8,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tr.gediz.ars.Main;
-import tr.gediz.ars.coordinator.PlaneFactory;
+import tr.gediz.ars.factory.PlaneFactory;
 import tr.gediz.ars.coordinator.RadarCoordinator;
 import tr.gediz.ars.model.UserInfo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
+/**
+ * A JavaFX controller for the login window.
+ */
 public class LoginController {
     public TextField id;
     public Label labelsample;
@@ -76,7 +73,6 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/main.fxml"));
             Parent root = (Parent) loader.load();
-            MainController.setInstance((MainController) loader.getController());
             Stage stage = new Stage();
             stage.setTitle("Radar HQ");
             stage.setScene(new Scene(root, 1471, 680));
@@ -93,6 +89,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Sets {@link Stage} used to display this window.
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }

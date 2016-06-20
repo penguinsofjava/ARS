@@ -2,11 +2,15 @@ package tr.gediz.ars.ui.cell;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import tr.gediz.ars.controller.ThreatItemController;
 import tr.gediz.ars.model.Threat;
 
+/**
+ * A {@link ListCell} used for displaying {@link Threat} items in a {@link ListView} to the right of the map.
+ */
 public class ThreatListCell extends ListCell<Threat> {
 
     @SuppressWarnings("Duplicates")

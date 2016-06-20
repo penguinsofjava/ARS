@@ -1,5 +1,8 @@
 package tr.gediz.ars.model;
 
+/**
+ * A position on the 2D coordinate grid.
+ */
 public class Position {
     private int x;
     private int y;

@@ -1,5 +1,8 @@
 package tr.gediz.ars.model;
 
+/**
+ * A model class for a user.
+ */
 public class UserInfo {
     private String id;
     private String pw;

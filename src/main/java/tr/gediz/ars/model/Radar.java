@@ -1,5 +1,8 @@
 package tr.gediz.ars.model;
 
+/**
+ * A model for a radar.
+ */
 public class Radar {
     private int id;
     private String name;

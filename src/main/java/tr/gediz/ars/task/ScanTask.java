@@ -8,15 +8,14 @@ import tr.gediz.ars.model.Radar;
 import tr.gediz.ars.model.Threat;
 import tr.gediz.ars.view.PlaneView;
 
+import javax.swing.text.html.ListView;
 import java.util.ConcurrentModificationException;
-import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * A {@link TimerTask} that performs a task for {@link Plane}s on the "map" to see whether they are friendly or hostile
- * and kicks off some notifications and stuff...
- * <p>
- * Make sure to cancel the parent {@link Timer} once you are done with it!
+ * A {@link TimerTask} that performs a scan for {@link Plane}s on the map to see whether they are friendly or hostile.
+ * Upon finding a hostile plane (i.e., {@link Threat}), it adds it to {@link MainController#threats}, which in turn
+ * displays the {@link Threat} on a {@link ListView} to the right of the map.
  */
 public class ScanTask extends TimerTask {
     private Radar radar;

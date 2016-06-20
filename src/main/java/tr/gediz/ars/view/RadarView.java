@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.util.Duration;
+import tr.gediz.ars.model.Plane;
 import tr.gediz.ars.model.Position;
 import tr.gediz.ars.model.Positionable;
 import tr.gediz.ars.model.Radar;
@@ -15,6 +16,9 @@ import tr.gediz.ars.task.ScanTask;
 
 import java.util.Timer;
 
+/**
+ * A subclass of {@link Pane} that we use to display {@link Radar}s on screen.
+ */
 public class RadarView extends Pane implements Positionable {
     private Radar radar;
 
@@ -75,6 +79,10 @@ public class RadarView extends Pane implements Positionable {
         setLayoutY(getLayoutY() + by);
     }
 
+    /**
+     * Starts scanning for {@link Plane}s by starting {@link #scannerTimer} with {@link ScanTask} and by passing <i>true</i>
+     * to {@link #toggleAnimation(boolean)}.
+     */
     public void startScanning() {
         if (scannerTimer == null) {
             scannerTimer = new Timer();
@@ -85,6 +93,10 @@ public class RadarView extends Pane implements Positionable {
         scanning = true;
     }
 
+    /**
+     * Stops scanning for {@link Plane}s by cancelling {@link #scannerTimer} and by passing <i>false</i> to
+     * {@link #toggleAnimation(boolean)}.
+     */
     public void stopScanning() {
         if (scannerTimer != null) {
             scannerTimer.cancel();
@@ -94,6 +106,10 @@ public class RadarView extends Pane implements Positionable {
         scanning = false;
     }
 
+    /**
+     * Returns whether this {@link RadarView} is currently active and scanning.
+     * @return <i>true</i> if active, <i>false</i> otherwise.
+     */
     public boolean isScanning() {
         return scanning;
     }

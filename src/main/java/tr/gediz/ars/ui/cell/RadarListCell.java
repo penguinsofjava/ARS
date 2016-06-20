@@ -2,11 +2,15 @@ package tr.gediz.ars.ui.cell;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import tr.gediz.ars.model.Radar;
 import tr.gediz.ars.controller.RadarItemController;
 
+/**
+ * A {@link ListCell} used for displaying {@link Radar} items in a {@link ListView} to the left of the map.
+ */
 public class RadarListCell extends ListCell<Radar> {
 
     @SuppressWarnings("Duplicates")

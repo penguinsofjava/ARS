@@ -2,6 +2,9 @@ package tr.gediz.ars.model;
 
 import javafx.scene.paint.Color;
 
+/**
+ * A model for a plane.
+ */
 public class Plane {
     public static final String[] MODELS = {
             "F-16",

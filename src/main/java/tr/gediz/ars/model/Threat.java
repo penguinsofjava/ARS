@@ -1,5 +1,13 @@
 package tr.gediz.ars.model;
 
+import javax.swing.text.html.ListView;
+
+/**
+ * A container class for storing a {@link Radar} and a {@link Plane} object.
+ *
+ * We use this class for keeping threatening planes and the radars that detected them together so that we can display
+ * them in a {@link ListView}.
+ */
 public class Threat {
     private Radar founder;
     private Plane target;
