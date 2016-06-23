@@ -409,7 +409,7 @@ public class MainController implements Initializable {
                     }
                 }
             } catch (ConcurrentModificationException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 Log.log("Error while removing threat item for removed plane. Trying again...");
                 removeThreatForRemovedPlane(plane);
             }

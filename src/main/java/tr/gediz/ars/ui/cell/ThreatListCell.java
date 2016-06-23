@@ -47,7 +47,7 @@ public class ThreatListCell extends ListCell<Threat> {
             pane.setPrefHeight(0);
             setGraphic(pane);
         } catch (IllegalStateException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 }
